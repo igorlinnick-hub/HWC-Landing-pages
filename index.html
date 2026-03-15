@@ -1,1 +1,865 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Hawaii Wellness Clinic</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;background:#0d2f42;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);color:white;text-align:center;margin-bottom:8px;font-weight:400}h1 em{font-style:italic;color:#a8d8d3}.sub{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(168,216,211,.5);text-align:center;margin-bottom:48px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:720px;width:100%}.card{background:rgba(255,255,255,.05);border:1px solid rgba(58,174,160,.2);border-radius:16px;padding:32px 28px;text-decoration:none;transition:all .3s;display:flex;flex-direction:column;gap:12px}.card:hover{background:rgba(58,174,160,.1);border-color:rgba(58,174,160,.5);transform:translateY(-3px)}.num{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#3aaea0}.ttl{font-family:'Playfair Display',serif;font-size:1.3rem;color:white;font-weight:400;line-height:1.3}.dsc{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.65}.arr{font-size:1.4rem;color:#3aaea0;margin-top:auto;padding-top:8px}@media(max-width:600px){.grid{grid-template-columns:1fr}}</style></head><body><h1>Hawaii Wellness Clinic<br><em>Landing Pages</em></h1><p class="sub">Select a page to preview</p><div class="grid"><a class="card" href="/Menatl%20Health%20Landing%201"><div class="num">01</div><div class="ttl">Mental Health Solutions</div><div class="dsc">TMS, Ketamine IV, SGB, Esketamine</div><div class="arr">&#8594;</div></a><a class="card" href="/Wellness%20Landing%202"><div class="num">02</div><div class="ttl">Wellness and Vitality</div><div class="dsc">IV Therapy, NAD+, Peptides, BHRT</div><div class="arr">&#8594;</div></a><a class="card" href="/Pain%20%26%20Joint%20Landing%203"><div class="num">03</div><div class="ttl">Pain and Joint Solutions</div><div class="dsc">Regenerative therapies, Shockwave, Laser</div><div class="arr">&#8594;</div></a><a class="card" href="/Weight-Loss%20Landing%204v2"><div class="num">04</div><div class="ttl">Medical Weight Loss</div><div class="dsc">Semaglutide, Tirzepatide, Retatrutide</div><div class="arr">&#8594;</div></a></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yedino Systems — Growth Systems for Wellness Clinics</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0d0d; --warm:#f8f6f2; --cream:#f0ebe0; --parchment:#e8e0d0;
+  --sage:#5a7d5f; --sage-l:#ddeadf; --sage-d:#3d5941;
+  --clay:#c4724a; --clay-l:#f5ece6;
+  --muted:#6e6860; --border:#ddd8ce;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--warm);color:var(--ink);overflow-x:hidden}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5%;background:rgba(248,246,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Playfair Display',serif;font-size:1.25rem;letter-spacing:-.01em}.logo em{font-style:normal;color:var(--sage)}
+.nav-links{display:flex;gap:2rem;list-style:none}.nav-links a{text-decoration:none;color:var(--muted);font-size:.84rem;font-weight:400;transition:color .2s}.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:var(--warm);padding:.48rem 1.25rem;border-radius:100px;font-weight:500;font-size:.82rem;text-decoration:none;transition:all .2s}.nav-cta:hover{background:var(--sage-d)}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;align-items:center;padding:8rem 5% 5rem;gap:0;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:var(--warm);z-index:0}
+.hero-bg::after{content:'';position:absolute;top:0;right:0;width:45%;height:100%;background:var(--cream);clip-path:polygon(8% 0,100% 0,100% 100%,0% 100%);z-index:0}
+.hero-left{position:relative;z-index:1;padding-right:4rem}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-d);margin-bottom:1.8rem;opacity:0;animation:fadeUp .8s .1s forwards}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--sage)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,5rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .25s forwards}
+.hero h1 em{font-style:italic;color:var(--sage)}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.8;font-weight:300;max-width:440px;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .55s forwards}
+.btn-primary{background:var(--ink);color:var(--warm);padding:.85rem 2rem;border-radius:100px;font-size:.88rem;font-weight:500;text-decoration:none;transition:all .25s;display:inline-block}.btn-primary:hover{background:var(--sage-d);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.btn-ghost{background:transparent;color:var(--ink);padding:.85rem 2rem;border-radius:100px;font-size:.88rem;font-weight:500;text-decoration:none;border:1.5px solid var(--border);transition:all .25s;display:inline-block}.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-sm{padding:.55rem 1.3rem;font-size:.8rem}
+.btn-sage{background:var(--sage);color:#fff;padding:.85rem 2rem;border-radius:100px;font-size:.88rem;font-weight:500;text-decoration:none;transition:all .25s;display:inline-block}.btn-sage:hover{background:var(--sage-d);transform:translateY(-2px)}
+
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:1.1rem;opacity:0;animation:fadeIn 1s .5s forwards}
+.hero-img-main{border-radius:18px;overflow:hidden;aspect-ratio:3/4;max-height:420px}
+.hero-img-main img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-stat-row{display:flex;gap:.8rem}
+.hero-stat{flex:1;background:#fff;border-radius:14px;padding:1rem 1.1rem;border:1px solid var(--border)}
+.hero-stat .val{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--sage);line-height:1}
+.hero-stat .lbl{font-size:.7rem;color:var(--muted);margin-top:.2rem;font-weight:400}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap{overflow:hidden;background:var(--ink);color:var(--warm);padding:.85rem 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.marquee-track{display:flex;gap:0;white-space:nowrap;animation:marquee 28s linear infinite}
+.marquee-item{display:inline-flex;align-items:center;gap:.7rem;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:0 2.5rem;color:rgba(255,255,255,.5)}
+.marquee-item::before{content:'◆';font-size:.4rem;color:var(--sage)}
+
+/* ─── SECTION BASE ─── */
+.section{padding:6rem 5%}
+.section-alt{background:var(--cream)}
+.section-dark{background:var(--ink);color:#fff}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--sage)}
+.section-dark .eyebrow{color:#7cb882}
+.section-dark .eyebrow::before{background:#7cb882}
+h2.display{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.2vw,3.2rem);line-height:1.12;letter-spacing:-.025em;max-width:620px}
+h2.display em{font-style:italic;color:var(--sage)}
+.section-dark h2.display em{color:#8fca95}
+.body-text{font-size:.95rem;color:var(--muted);line-height:1.8;font-weight:300;max-width:520px;margin-top:1rem}
+.section-dark .body-text{color:rgba(255,255,255,.5)}
+
+/* ─── WHO WE HELP ─── */
+.who-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.who-image-collage{position:relative;height:480px}
+.wic-main{position:absolute;top:0;left:0;width:72%;border-radius:16px;overflow:hidden;aspect-ratio:3/4;max-height:340px}
+.wic-main img{width:100%;height:100%;object-fit:cover;display:block}
+.wic-float{position:absolute;bottom:0;right:0;width:58%;border-radius:14px;overflow:hidden;aspect-ratio:4/5;max-height:260px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.wic-float img{width:100%;height:100%;object-fit:cover;display:block}
+.clinic-chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:2rem}
+.chip{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:100px;border:1.5px solid var(--border);font-size:.8rem;color:var(--ink);font-weight:400;background:#fff;transition:all .2s;cursor:default}
+.chip:hover{border-color:var(--sage);background:var(--sage-l);color:var(--sage-d)}
+.chip-icon{font-size:.85rem}
+.pull-quote{background:var(--ink);color:#fff;border-radius:16px;padding:2rem;margin-top:2rem}
+.pull-quote p{font-family:'Playfair Display',serif;font-size:1.15rem;line-height:1.55;font-style:italic;margin-bottom:.75rem}
+.pull-quote cite{font-size:.72rem;color:rgba(255,255,255,.38)}
+
+/* ─── PROBLEMS ─── */
+.problems-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.prob-list{display:flex;flex-direction:column;gap:.7rem;margin-top:.5rem}
+.prob-item{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.25rem;border:1px solid var(--border);border-radius:14px;transition:all .25s;cursor:default;background:#fff}
+.prob-item:hover{border-color:var(--clay);background:var(--clay-l);transform:translateX(6px)}
+.prob-num{font-family:'Playfair Display',serif;font-size:.9rem;color:var(--border);flex-shrink:0;line-height:1.6;font-style:italic;min-width:22px}
+.prob-text{font-size:.86rem;line-height:1.55;font-weight:400}
+.solve-panel{background:var(--sage);color:#fff;border-radius:20px;padding:2.5rem;position:sticky;top:7rem}
+.solve-panel h3{font-family:'Playfair Display',serif;font-size:1.55rem;margin-bottom:1rem;line-height:1.2}
+.solve-panel p{font-size:.85rem;line-height:1.8;opacity:.88;font-weight:300;margin-bottom:1.5rem}
+.solve-items{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.solve-item{display:flex;align-items:center;gap:.7rem;font-size:.82rem;opacity:.9}
+.solve-item::before{content:'✓';font-weight:700;background:rgba(255,255,255,.18);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0}
+
+/* ─── SERVICES ─── */
+.services-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end;margin-bottom:4rem}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.svc-card{background:var(--warm);padding:2.25rem;position:relative;transition:background .25s;overflow:hidden}
+.svc-card:hover{background:var(--cream)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--sage);transition:height .35s}.svc-card:hover::before{height:100%}
+.svc-num{font-family:'Playfair Display',serif;font-size:.78rem;color:var(--sage);margin-bottom:1.25rem;font-style:italic}
+.svc-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.6rem;line-height:1.2}
+.svc-card p{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;font-weight:300}
+.svc-img{border-radius:12px;overflow:hidden;margin-bottom:1.25rem;aspect-ratio:16/9}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}.svc-card:hover .svc-img img{transform:scale(1.04)}
+.svc-tags{display:flex;flex-wrap:wrap;gap:.38rem}
+.stag{font-size:.65rem;color:var(--sage-d);border:1px solid var(--sage-l);background:var(--sage-l);padding:.2rem .65rem;border-radius:100px;font-weight:500}
+.svc-arrow{position:absolute;top:2rem;right:2rem;font-size:.95rem;color:var(--border);transition:all .22s}.svc-card:hover .svc-arrow{color:var(--sage);transform:translate(3px,-3px)}
+
+/* ─── CONTENT PROOF ─── */
+.content-proof{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.ig-showcase{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem}
+.ig-tile{border-radius:12px;overflow:hidden;aspect-ratio:4/5;cursor:pointer;position:relative}
+.ig-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s,filter .35s}
+.ig-tile:hover img{transform:scale(1.06);filter:brightness(.8)}
+.ig-tile-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:.65rem;background:linear-gradient(transparent 50%,rgba(0,0,0,.5));opacity:0;transition:opacity .25s}
+.ig-tile:hover .ig-tile-overlay{opacity:1}
+.ig-tile-overlay span{color:#fff;font-size:.7rem;font-weight:500}
+.ig-more-tile{border-radius:12px;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:4/5;cursor:pointer;transition:all .2s;text-decoration:none}
+.ig-more-tile:hover{background:var(--sage-d)}
+.ig-more-tile span{color:#fff;font-size:.78rem;margin-top:.4rem;font-weight:500}
+.content-right .eyebrow{margin-bottom:1rem}
+.ig-profile-pill{display:inline-flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--border);border-radius:100px;padding:.45rem 1rem .45rem .5rem;margin-bottom:1.75rem}
+.ig-av{width:34px;height:34px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.ig-profile-pill span{font-size:.8rem;font-weight:500;color:var(--ink)}
+.content-stats{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-top:2rem}
+.cstat{padding:1rem;background:#fff;border:1px solid var(--border);border-radius:12px}
+.cstat .val{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--sage)}
+.cstat .lbl{font-size:.7rem;color:var(--muted);margin-top:.15rem}
+
+/* ─── AUTOMATION SECTION ─── */
+.auto-intro{max-width:700px;margin-bottom:4rem}
+.flow-canvas{background:#fff;border:1px solid var(--border);border-radius:24px;padding:3rem;overflow:hidden;position:relative}
+.flow-canvas::before{content:'AUTOMATION FLOW';position:absolute;top:1.5rem;right:2rem;font-size:.62rem;letter-spacing:.14em;color:var(--border);font-weight:600}
+.flow-row{display:flex;align-items:stretch;gap:0;position:relative}
+.flow-node{flex:1;position:relative}
+.flow-connector{width:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
+.flow-connector::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:var(--sage-l)}
+.fc-arrow{width:24px;height:24px;background:var(--sage);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1;position:relative;flex-shrink:0}
+.fc-arrow::after{content:'▶';font-size:.45rem;color:#fff;margin-left:1px}
+.fnode-box{border:1.5px solid var(--border);border-radius:16px;padding:1.3rem;height:100%;background:#fff;transition:all .3s;position:relative}
+.fnode-box:hover{border-color:var(--sage);box-shadow:0 4px 20px rgba(90,125,95,.12);transform:translateY(-3px)}
+.fnode-box.trigger{border-color:var(--sage);background:var(--sage-l)}
+.fnode-box.outcome{border-color:var(--clay);background:var(--clay-l)}
+.fnode-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:.75rem;background:var(--sage-l)}
+.fnode-box.trigger .fnode-icon{background:rgba(255,255,255,.6)}
+.fnode-box.outcome .fnode-icon{background:rgba(196,114,74,.15)}
+.fnode-type{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:.3rem}
+.fnode-box.outcome .fnode-type{color:var(--clay)}
+.fnode-title{font-family:'Playfair Display',serif;font-size:.92rem;line-height:1.3;margin-bottom:.4rem;font-weight:700}
+.fnode-detail{font-size:.74rem;color:var(--muted);line-height:1.55}
+.fnode-badge{display:inline-block;background:var(--sage);color:#fff;font-size:.62rem;font-weight:600;padding:.18rem .55rem;border-radius:100px;margin-top:.6rem}
+.fnode-box.outcome .fnode-badge{background:var(--clay)}
+
+/* second row with branch */
+.flow-branch{margin-top:2.5rem;padding-top:2.5rem;border-top:1px dashed var(--border);display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.branch-label{grid-column:1/-1;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.branch-label::before{content:'';flex:1;height:1px;background:var(--border)}
+.branch-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.branch-node{border:1px solid var(--border);border-radius:14px;padding:1.25rem;background:#fafaf8}
+.branch-node h4{font-family:'Playfair Display',serif;font-size:.9rem;margin-bottom:.35rem}
+.branch-node p{font-size:.75rem;color:var(--muted);line-height:1.55}
+.branch-node .ctr{font-size:.75rem;font-weight:600;color:var(--sage);margin-top:.5rem}
+
+.flow-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden;margin-top:2rem}
+.fstat{background:var(--warm);padding:1.35rem;text-align:center}
+.fstat .val{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--sage)}
+.fstat .lbl{font-size:.68rem;color:var(--muted);margin-top:.15rem}
+
+/* animated pulse on trigger */
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(90,125,95,.35)}70%{box-shadow:0 0 0 10px rgba(90,125,95,0)}100%{box-shadow:0 0 0 0 rgba(90,125,95,0)}}
+.fnode-box.trigger{animation:pulse-ring 2.5s ease-out infinite}
+
+/* ─── LANDING PAGES ─── */
+.lp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-top:3rem}
+.lp-card{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff;transition:all .25s;cursor:pointer}
+.lp-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.1);border-color:transparent}
+.lp-thumb{height:170px;display:flex;align-items:center;justify-content:center;position:relative;font-size:2.8rem}
+.lp-thumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.07)}
+.lp-body{padding:1.4rem}
+.lp-body h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.35rem}
+.lp-body p{font-size:.79rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;font-weight:300}
+.lp-view{display:inline-flex;align-items:center;gap:.35rem;font-size:.76rem;font-weight:600;color:var(--sage-d);border:1.5px solid var(--sage);border-radius:100px;padding:.38rem .95rem;text-decoration:none;transition:all .2s;font-family:'Outfit',sans-serif;cursor:pointer;background:transparent}.lp-view:hover{background:var(--sage);color:#fff}
+
+/* ─── APP SECTION ─── */
+.app-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.app-phones{display:flex;gap:1.5rem;align-items:flex-start;justify-content:center}
+.app-phones img{width:180px;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.18);display:block}
+.app-features{display:flex;flex-direction:column;gap:.7rem;margin:1.5rem 0}
+.af-item{display:flex;align-items:flex-start;gap:.8rem;padding:.85rem 1rem;background:#fff;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.af-item:hover{border-color:var(--sage);background:var(--sage-l)}
+.af-icon{font-size:1rem;flex-shrink:0;margin-top:.05rem}
+.af-text h5{font-size:.84rem;font-weight:600;margin-bottom:.15rem}
+.af-text p{font-size:.75rem;color:var(--muted);line-height:1.45}
+
+/* ─── RESULTS ─── */
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin:3rem 0}
+.metric{background:var(--ink);padding:1.85rem;transition:background .25s}.metric:hover{background:#1a1a1a}
+.metric .big{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--sage);line-height:1;margin-bottom:.3rem}
+.metric .desc{font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.55;font-weight:300}
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.case-card{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:1.75rem;transition:all .25s}
+.case-card:hover{background:#161616;border-color:rgba(90,125,95,.3)}
+.case-badge{display:inline-block;background:rgba(90,125,95,.18);color:#8fca95;font-size:.63rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .7rem;border-radius:100px;margin-bottom:.9rem}
+.case-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.45rem;line-height:1.3}
+.case-card p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.65;font-weight:300}
+.case-nums{display:flex;gap:1.5rem;margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,.07)}
+.case-nums .n{font-family:'Playfair Display',serif;font-size:1.35rem;color:#8fca95}
+.case-nums .l{font-size:.67rem;color:rgba(255,255,255,.3);margin-top:.07rem}
+
+/* ─── VIDEO PROOF ─── */
+.video-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+.vid-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.vtile{border-radius:14px;overflow:hidden;position:relative;cursor:pointer;aspect-ratio:9/16;background:var(--ink)}
+.vtile img{width:100%;height:100%;object-fit:cover;opacity:.68;display:block;transition:all .3s}
+.vtile:hover img{opacity:.5;transform:scale(1.04)}
+.vtile-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.vtile-play-btn{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;transition:all .2s}.vtile:hover .vtile-play-btn{background:rgba(255,255,255,.25);transform:scale(1.1)}
+.vtile-play-icon{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:15px solid #fff;margin-left:3px}
+.vtile-lbl{position:absolute;bottom:0;left:0;right:0;padding:.75rem .9rem;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-size:.71rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;z-index:2}
+.vtile-a{display:block;text-decoration:none;height:100%}
+.vtile-wide{grid-column:1/-1;aspect-ratio:16/7}
+
+/* ─── WHY ─── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:20px;overflow:hidden;margin-top:3rem}
+.wi{background:var(--ink);padding:2rem;transition:background .25s}.wi:hover{background:#111}
+.wi-icon{font-size:1.35rem;margin-bottom:1.1rem}
+.wi h4{font-family:'Playfair Display',serif;font-size:1rem;color:#fff;margin-bottom:.48rem}
+.wi p{font-size:.79rem;color:rgba(255,255,255,.38);line-height:1.7;font-weight:300}
+
+/* ─── CTA ─── */
+.cta-section{text-align:center;padding:8rem 5%;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(90,125,95,.09) 0%,transparent 68%)}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,4rem);line-height:1.1;letter-spacing:-.03em;margin:1.2rem auto 1.3rem;max-width:680px}
+.cta-section h2 em{font-style:italic;color:var(--sage)}
+.cta-section p{font-size:.98rem;color:var(--muted);max-width:460px;margin:0 auto 2.5rem;line-height:1.75;font-weight:300}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ─── FOOTER ─── */
+footer{background:var(--ink);color:#fff;padding:2.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.1rem}
+.flogo{font-family:'Playfair Display',serif;font-size:1.15rem}.flogo em{font-style:normal;color:var(--sage)}
+.flinks{display:flex;gap:1.75rem;flex-wrap:wrap}.flinks a{color:rgba(255,255,255,.28);font-size:.78rem;text-decoration:none;transition:color .2s}.flinks a:hover{color:rgba(255,255,255,.65)}
+.fcopy{font-size:.72rem;color:rgba(255,255,255,.14)}
+
+/* ─── MODAL ─── */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px)}.mo.open{display:flex}
+.mb{background:#fff;border-radius:20px;overflow:hidden;max-width:960px;width:95vw;max-height:92vh;display:flex;flex-direction:column}
+.mh{padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.mh h3{font-family:'Playfair Display',serif;font-size:1.1rem}
+.mclose{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted);line-height:1;padding:.1rem .3rem}
+.mframe{overflow-y:auto;flex:1}.mframe iframe{width:100%;height:74vh;border:none;display:block}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ─── TABS ─── */
+.ptabs{display:flex;gap:.45rem;margin-bottom:2rem;flex-wrap:wrap}
+.ptab{padding:.48rem 1.1rem;border-radius:100px;border:1.5px solid var(--border);font-size:.79rem;cursor:pointer;transition:all .2s;background:transparent;font-family:'Outfit',sans-serif;color:var(--muted);font-weight:400}
+.ptab.active,.ptab:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ppanel{display:none}.ppanel.active{display:block}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding:7rem 5% 4rem}
+  .hero-right{display:none}
+  .who-layout,.problems-layout,.content-proof,.services-intro,.video-layout,.app-layout{grid-template-columns:1fr;gap:2.5rem}
+  .svc-grid,.cases,.lp-grid{grid-template-columns:1fr}
+  .metrics-row{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr}
+  .ig-showcase{grid-template-columns:repeat(2,1fr)}
+  .vid-grid-2{grid-template-columns:1fr}
+  .vtile-wide{grid-column:1}
+  .flow-row{flex-direction:column;gap:1rem}
+  .flow-connector{width:100%;height:40px}.flow-connector::before{top:0;bottom:0;left:50%;right:auto;width:2px;height:100%}
+  .fc-arrow{transform:rotate(90deg)}
+  .flow-branch{grid-template-columns:1fr}
+  .nav-links{display:none}
+  footer{flex-direction:column;text-align:center}
+}
+
+/* Lucide icon sizing */
+.wi-icon svg, .fnode-icon svg, .chip-icon svg, .af-icon svg, .solve-item svg { display:inline-block; vertical-align:middle; }
+.wi-icon svg { width:22px; height:22px; stroke:rgba(255,255,255,.65); }
+.fnode-icon svg { width:18px; height:18px; }
+.fnode-box.trigger .fnode-icon svg { stroke:var(--sage-d); }
+.fnode-box.outcome .fnode-icon svg { stroke:var(--clay); }
+.fnode-box:not(.trigger):not(.outcome) .fnode-icon svg { stroke:var(--sage); }
+.chip-icon svg { width:14px; height:14px; stroke:var(--sage); }
+.af-icon svg { width:18px; height:18px; stroke:var(--sage); }
+.svc-arrow svg { width:16px; height:16px; stroke:var(--border); transition:all .22s; }
+.svc-card:hover .svc-arrow svg { stroke:var(--sage); transform:translate(3px,-3px); }
+.hero-stat svg { width:14px; height:14px; }
+.solve-item svg { width:14px; height:14px; stroke:rgba(255,255,255,.7); margin-right:2px; }
+/* nav cta arrow */
+nav svg { width:14px; height:14px; vertical-align:middle; }
+/* ig more tile */
+.ig-more-tile svg { width:22px; height:22px; stroke:rgba(255,255,255,.7); }
+/* vtile label */
+.vtile-lbl svg { width:12px; height:12px; }
+/* flow branch */
+.branch-node h4 svg { width:14px; height:14px; stroke:var(--sage); vertical-align:middle; }
+/* lp card */
+.lp-thumb svg { width:40px; height:40px; stroke:rgba(255,255,255,.8); position:relative; z-index:1; }
+/* cta eyebrow */
+.cta-section .eyebrow svg { width:14px; height:14px; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="logo">Yedino<em>.</em></div>
+  <ul class="nav-links">
+    <li><a href="#who">Who We Help</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#automation">Automation</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Growth Infrastructure for Wellness Clinics</div>
+    <h1>Systems that<br>turn <em>interest</em><br>into booked<br>consultations</h1>
+    <p class="hero-sub">We build the automation, content, and digital infrastructure that helps regenerative, ketamine, and wellness clinics attract patients and grow &mdash; without adding work to your team.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Strategy Call</a>
+      <a href="#portfolio" class="btn-ghost">See Our Work &rarr;</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-main">
+      <img src="images/image1.jpg" alt="ExoMind treatment at Hawaii Wellness Clinic">
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat"><div class="val">3.2&times;</div><div class="lbl">More consultations</div></div>
+      <div class="hero-stat"><div class="val">54%</div><div class="lbl">DM open rate</div></div>
+      <div class="hero-stat"><div class="val">24/7</div><div class="lbl">Auto-response</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Ketamine Therapy</span>
+    <span class="marquee-item">Stem Cell Clinics</span>
+    <span class="marquee-item">IV Therapy</span>
+    <span class="marquee-item">Regenerative Medicine</span>
+    <span class="marquee-item">Functional Medicine</span>
+    <span class="marquee-item">NAD+ Therapy</span>
+    <span class="marquee-item">Longevity Centers</span>
+    <span class="marquee-item">Biohacking Clinics</span>
+    <span class="marquee-item">Mental Health Clinics</span>
+    <span class="marquee-item">Ketamine Therapy</span>
+    <span class="marquee-item">Stem Cell Clinics</span>
+    <span class="marquee-item">IV Therapy</span>
+    <span class="marquee-item">Regenerative Medicine</span>
+    <span class="marquee-item">Functional Medicine</span>
+    <span class="marquee-item">NAD+ Therapy</span>
+    <span class="marquee-item">Longevity Centers</span>
+    <span class="marquee-item">Biohacking Clinics</span>
+    <span class="marquee-item">Mental Health Clinics</span>
+  </div>
+</div>
+
+<!-- ─── WHO WE HELP ─── -->
+<section class="section section-alt" id="who">
+  <div class="eyebrow reveal">Who We Work With</div>
+  <div class="who-layout">
+    <div class="who-image-collage reveal">
+      <div class="wic-main">
+        <img src="images/image2.jpg" alt="ExoMind brain stimulation at Hawaii Wellness Clinic">
+      </div>
+      <div class="wic-float">
+        <img src="images/image3.jpg" alt="NAD+ Therapy">
+      </div>
+    </div>
+    <div>
+      <h2 class="display reveal d1">Forward-thinking clinics offering <em>advanced therapies</em></h2>
+      <p class="body-text reveal d2">We work exclusively with clinics in the wellness and regenerative medicine space. Not a generalist agency &mdash; we know the patient journey intimately.</p>
+      <div class="clinic-chips reveal d2">
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></span>Ketamine Therapy</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></svg></span>Regenerative Medicine</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.56 2h6.88"/><path d="M7.42 9.69a7.68 7.68 0 1 0 9.16 0"/><path d="M10.5 15.5h3"/></svg></span>Stem Cell Clinics</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span>IV Therapy &amp; NAD+</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span>Functional Medicine</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>Biohacking &amp; Longevity</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></span>Mental Health Clinics</span>
+        <span class="chip"><span class="chip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span>Weight Loss Programs</span>
+      </div>
+      <div class="pull-quote reveal d3">
+        <p>&ldquo;We don&rsquo;t just market clinics &mdash; we build the digital infrastructure that helps them grow and serve more patients.&rdquo;</p>
+        <cite>&mdash; Yedino Systems</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEMS ─── -->
+<section class="section" id="problems">
+  <div class="eyebrow reveal">The Problem We Solve</div>
+  <div class="problems-layout">
+    <div>
+      <h2 class="display reveal d1">Challenges <em>most</em> wellness clinics face daily</h2>
+      <div class="prob-list" style="margin-top:2rem">
+        <div class="prob-item reveal"><span class="prob-num">01</span><span class="prob-text">Patients ask the same questions repeatedly &mdash; wasting hours of staff time</span></div>
+        <div class="prob-item reveal d1"><span class="prob-num">02</span><span class="prob-text">Strong social media presence, but it doesn&rsquo;t convert into actual bookings</span></div>
+        <div class="prob-item reveal d1"><span class="prob-num">03</span><span class="prob-text">Inquiries come in at all hours and follow-up is inconsistent</span></div>
+        <div class="prob-item reveal d2"><span class="prob-num">04</span><span class="prob-text">Educational content is either missing or doesn&rsquo;t build patient trust</span></div>
+        <div class="prob-item reveal d2"><span class="prob-num">05</span><span class="prob-text">Website doesn&rsquo;t explain treatments clearly enough to move leads forward</span></div>
+        <div class="prob-item reveal d3"><span class="prob-num">06</span><span class="prob-text">No system to track, nurture, or follow up with interested leads</span></div>
+        <div class="prob-item reveal d3"><span class="prob-num">07</span><span class="prob-text">Patient reviews and testimonials are underutilized and inconsistent</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="solve-panel reveal d2">
+        <h3>We build systems that solve all of this automatically</h3>
+        <p>Your team stays focused on delivering exceptional care. We handle the digital infrastructure that brings patients to you &mdash; and keeps them engaged.</p>
+        <div class="solve-items">
+          <div class="solve-item">24/7 automated patient communication</div>
+          <div class="solve-item">Educational content that builds trust at scale</div>
+          <div class="solve-item">Conversion-focused landing pages per treatment</div>
+          <div class="solve-item">Lead nurturing and follow-up systems</div>
+          <div class="solve-item">Reputation and review management</div>
+        </div>
+        <a href="#contact" class="btn-primary btn-sm" style="background:#fff;color:var(--sage-d);">Get a Custom Growth Plan &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="section section-alt" id="services">
+  <div class="services-intro">
+    <div>
+      <div class="eyebrow reveal">Our Core Services</div>
+      <h2 class="display reveal d1">Complete <em>growth infrastructure</em> for your clinic</h2>
+    </div>
+    <p class="body-text reveal d2" style="margin-top:0">We don&rsquo;t just run ads. We build the systems that attract, educate, and convert patients consistently &mdash; month after month.</p>
+  </div>
+  <div class="svc-grid reveal">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <span class="svc-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+      <div class="svc-img">
+        <img src="images/image4.jpg" alt="Content calendar and Instagram strategy">
+      </div>
+      <h3>Educational Content Systems</h3>
+      <p>Consistent, trust-building content that helps patients understand complex treatments and feel confident booking a consultation.</p>
+      <div class="svc-tags"><span class="stag">Instagram Strategy</span><span class="stag">Short-Form Video</span><span class="stag">Reels &amp; Shorts</span><span class="stag">Content Calendar</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <span class="svc-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+      <div class="svc-img" style="background:#f0ebe0;display:flex;align-items:center;justify-content:center">
+        <!-- Mini automation preview -->
+        <div style="width:100%;padding:1.2rem;font-family:'Outfit',sans-serif">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem">
+            <div style="width:28px;height:28px;background:#ddeadf;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.8rem"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div style="font-size:.72rem;font-weight:600;color:#3d5941">New follower detected</div>
+          </div>
+          <div style="display:flex;gap:.35rem;margin-bottom:.5rem;padding-left:14px">
+            <div style="width:2px;background:#ddeadf;border-radius:2px"></div>
+            <div style="background:#fff;border:1px solid #ddd8ce;border-radius:9px;padding:.6rem .85rem;font-size:.7rem;color:#6e6860;line-height:1.4;flex:1">"Aloha! Welcome to Hawaii Wellness Clinic <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3H9m7.5 0H15m-3 4.5V15"/><circle cx="12" cy="12" r="3"/><path d="m8 16 1.5-1.5"/><path d="M14.5 9.5 16 8"/><path d="m8 8 1.5 1.5"/><path d="M14.5 14.5 16 16"/></svg> How can we guide you today?"</div>
+          </div>
+          <div style="display:flex;gap:.4rem;padding-left:14px">
+            <div style="font-size:.65rem;background:#5a7d5f;color:#fff;padding:.2rem .6rem;border-radius:100px;font-weight:500">Book a Consult</div>
+            <div style="font-size:.65rem;background:#fff;color:#5a7d5f;border:1px solid #5a7d5f;padding:.2rem .6rem;border-radius:100px;font-weight:500">Explore Treatments</div>
+          </div>
+        </div>
+      </div>
+      <h3>Patient Communication Automation</h3>
+      <p>Instant, personalized responses to every inquiry &mdash; 24/7. Qualify leads, answer FAQs, and guide patients toward booking without lifting a finger.</p>
+      <div class="svc-tags"><span class="stag">DM Automation</span><span class="stag">Lead Qualification</span><span class="stag">FAQ Bot</span><span class="stag">24/7 Response</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <span class="svc-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+      <div class="svc-img" style="background:linear-gradient(135deg,#2d4a35,#4a6b50);display:flex;align-items:center;justify-content:center">
+        <div style="text-align:center;padding:1.5rem;color:#fff">
+          <div style="font-size:1.8rem;margin-bottom:.5rem"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;margin-bottom:.3rem">Mental Health</div>
+          <div style="font-size:.7rem;opacity:.65">Ketamine &middot; SGB &middot; ExoMind</div>
+        </div>
+      </div>
+      <h3>Conversion-Focused Landing Pages</h3>
+      <p>Custom pages per treatment that explain what you offer clearly, build credibility, and make it easy for patients to take the next step.</p>
+      <div class="svc-tags"><span class="stag">Ketamine Therapy</span><span class="stag">Stem Cell Pages</span><span class="stag">IV Therapy</span><span class="stag">NAD+ Recovery</span></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <span class="svc-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
+      <div class="svc-img" style="display:flex;gap:.5rem;padding:1rem;background:#f8f6f2;align-items:center;justify-content:center">
+        <img src="images/image5.jpg" alt="Mobile app" style="width:90px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.15)">
+        <img src="images/image6.jpg" alt="Linktree" style="width:90px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+      </div>
+      <h3>Patient Experience &amp; Digital Presence</h3>
+      <p>Mobile app setup, Linktree, automated review collection, and reputation management &mdash; building trust and social proof at scale.</p>
+      <div class="svc-tags"><span class="stag">Review Automation</span><span class="stag">Mobile Apps</span><span class="stag">Linktree</span><span class="stag">Reputation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTENT PROOF ─── -->
+<section class="section" id="portfolio">
+  <div class="eyebrow reveal">Instagram Content System</div>
+  <div class="content-proof">
+    <div>
+      <div class="ig-profile-pill reveal">
+        <div class="ig-av"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3H9m7.5 0H15m-3 4.5V15"/><circle cx="12" cy="12" r="3"/><path d="m8 16 1.5-1.5"/><path d="M14.5 9.5 16 8"/><path d="m8 8 1.5 1.5"/><path d="M14.5 14.5 16 16"/></svg></div>
+        <span>@hawaiiwellnessclinic</span>
+      </div>
+      <div class="ig-showcase reveal d1">
+        <div class="ig-tile" onclick="window.open('https://www.instagram.com/hawaiiwellnessclinic/','_blank')">
+          <img src="images/image7.jpg" alt="ExoMind">
+          <div class="ig-tile-overlay"><span>ExoMind Treatment</span></div>
+        </div>
+        <div class="ig-tile" onclick="window.open('https://www.instagram.com/hawaiiwellnessclinic/','_blank')">
+          <img src="images/image8.jpg" alt="No downtime">
+          <div class="ig-tile-overlay"><span>No Downtime</span></div>
+        </div>
+        <div class="ig-tile" onclick="window.open('https://www.instagram.com/hawaiiwellnessclinic/','_blank')">
+          <img src="images/image9.jpg" alt="Find clarity">
+          <div class="ig-tile-overlay"><span>Find Clarity</span></div>
+        </div>
+        <div class="ig-tile" onclick="window.open('https://www.instagram.com/hawaiiwellnessclinic/','_blank')">
+          <img src="images/image10.jpg" alt="NAD+ Therapy">
+          <div class="ig-tile-overlay"><span>NAD+ Therapy</span></div>
+        </div>
+        <div class="ig-tile" onclick="window.open('https://www.instagram.com/hawaiiwellnessclinic/','_blank')">
+          <img src="images/image11.jpg" alt="98% satisfaction">
+          <div class="ig-tile-overlay"><span>98% Satisfaction</span></div>
+        </div>
+        <a class="ig-more-tile" href="https://www.instagram.com/hawaiiwellnessclinic/" target="_blank">
+          <div style="font-size:1.5rem"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
+          <span>View All</span>
+        </a>
+      </div>
+    </div>
+    <div class="content-right">
+      <div class="eyebrow reveal">Real Client Work</div>
+      <h2 class="display reveal d1">Content that <em>educates</em> and converts</h2>
+      <p class="body-text reveal d2">Every post is crafted to move a potential patient one step closer to booking &mdash; explaining complex treatments in ways that feel accessible and trustworthy.</p>
+      <div class="content-stats reveal d3">
+        <div class="cstat"><div class="val">11</div><div class="lbl">Educational videos produced</div></div>
+        <div class="cstat"><div class="val">52+</div><div class="lbl">Posts per quarter</div></div>
+        <div class="cstat"><div class="val">100%</div><div class="lbl">Treatment-specific content</div></div>
+        <div class="cstat"><div class="val">98%</div><div class="lbl">Patient satisfaction rate</div></div>
+      </div>
+      <div style="margin-top:1.75rem" class="reveal d3">
+        <a href="https://www.instagram.com/hawaiiwellnessclinic/" target="_blank" class="btn-ghost btn-sm">View Live on Instagram <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VIDEO PROOF ─── -->
+<section class="section section-alt">
+  <div class="video-layout">
+    <div>
+      <div class="eyebrow reveal">Video Library</div>
+      <h2 class="display reveal d1">11 educational videos <em>produced</em> for every treatment</h2>
+      <p class="body-text reveal d2">Short-form videos designed for Reels, TikTok, and YouTube Shorts. Each one answers the questions patients are already searching for.</p>
+      <div style="margin-top:2rem" class="reveal d3">
+        <a href="https://vimeo.com/user/13820033/folder/28271673" target="_blank" class="btn-primary">View Full Video Library &rarr;</a>
+      </div>
+      <div style="display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap" class="reveal d3">
+        <div><div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--sage)">11</div><div style="font-size:.72rem;color:var(--muted)">Videos produced</div></div>
+        <div><div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--sage)">8</div><div style="font-size:.72rem;color:var(--muted)">Treatment categories</div></div>
+        <div><div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--sage)">3</div><div style="font-size:.72rem;color:var(--muted)">Platforms optimized</div></div>
+      </div>
+    </div>
+    <div class="vid-grid-2 reveal d1">
+      <div class="vtile">
+        <a class="vtile-a" href="https://vimeo.com/user/13820033/folder/28271673" target="_blank">
+          <img src="images/image12.jpg" alt="Stem Cells Patient Testimonial">
+          <div class="vtile-play"><div class="vtile-play-btn"><div class="vtile-play-icon"></div></div></div>
+          <div class="vtile-lbl">Stem Cells Testimonial</div>
+        </a>
+      </div>
+      <div class="vtile">
+        <a class="vtile-a" href="https://vimeo.com/user/13820033/folder/28271673" target="_blank">
+          <img src="images/image13.jpg" alt="ExoMind treatment video">
+          <div class="vtile-play"><div class="vtile-play-btn"><div class="vtile-play-icon"></div></div></div>
+          <div class="vtile-lbl">ExoMind &mdash; Brain Stimulation</div>
+        </a>
+      </div>
+      <div class="vtile vtile-wide">
+        <a class="vtile-a" href="https://vimeo.com/user/13820033/folder/28271673" target="_blank">
+          <img src="images/image14.jpg" alt="Full video library" style="object-position:top">
+          <div class="vtile-play"><div class="vtile-play-btn"><div class="vtile-play-icon"></div></div></div>
+          <div class="vtile-lbl">Ketamine &middot; NAD+ &middot; IV Vitamins &middot; Biologics &middot; HRT &middot; Weight Loss</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AUTOMATION FLOW ─── -->
+<section class="section" id="automation">
+  <div class="auto-intro">
+    <div class="eyebrow reveal">Patient Acquisition Automation</div>
+    <h2 class="display reveal d1">Every new follower becomes a <em>qualified lead</em> automatically</h2>
+    <p class="body-text reveal d2">The moment someone discovers your clinic on Instagram, our system takes over &mdash; welcoming them, answering questions, and guiding them toward booking. No staff required.</p>
+  </div>
+
+  <div class="flow-canvas reveal d1">
+    <div class="flow-row">
+      <div class="flow-node">
+        <div class="fnode-box trigger">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
+          <div class="fnode-type">Trigger</div>
+          <div class="fnode-title">User follows your Instagram</div>
+          <div class="fnode-detail">Detected instantly via Instagram API integration</div>
+          <span class="fnode-badge">Auto-triggered</span>
+        </div>
+      </div>
+      <div class="flow-connector"><div class="fc-arrow"></div></div>
+      <div class="flow-node">
+        <div class="fnode-box">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg></div>
+          <div class="fnode-type">Action &middot; Instagram DM</div>
+          <div class="fnode-title">Welcome message sent instantly</div>
+          <div class="fnode-detail">"Aloha and welcome <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3H9m7.5 0H15m-3 4.5V15"/><circle cx="12" cy="12" r="3"/><path d="m8 16 1.5-1.5"/><path d="M14.5 9.5 16 8"/><path d="m8 8 1.5 1.5"/><path d="M14.5 14.5 16 16"/></svg> We offer advanced regenerative treatments. How can we guide you today?"</div>
+          <span class="fnode-badge">&lt; 5 seconds</span>
+        </div>
+      </div>
+      <div class="flow-connector"><div class="fc-arrow"></div></div>
+      <div class="flow-node">
+        <div class="fnode-box">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+          <div class="fnode-type">Patient Responds</div>
+          <div class="fnode-title">Quick reply buttons shown</div>
+          <div class="fnode-detail">Patient taps a button &mdash; no typing required &mdash; choosing their path forward</div>
+        </div>
+      </div>
+      <div class="flow-connector"><div class="fc-arrow"></div></div>
+      <div class="flow-node">
+        <div class="fnode-box outcome">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div>
+          <div class="fnode-type">Outcome</div>
+          <div class="fnode-title">Lead qualified &amp; routed</div>
+          <div class="fnode-detail">Patient either books a consultation or enters a treatment education sequence</div>
+          <span class="fnode-badge">24/7 Active</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-branch">
+      <div class="branch-label">Patient chooses their path</div>
+      <div class="branch-node">
+        <h4><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg> &ldquo;Book a Consultation&rdquo;</h4>
+        <p>Patient is sent directly to your booking page with a personalized message. Consultation request captured immediately.</p>
+        <div class="ctr"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg> 3% tap-through rate</div>
+      </div>
+      <div class="branch-node">
+        <h4><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg> &ldquo;Explore Treatments&rdquo;</h4>
+        <p>Patient enters an educational sequence &mdash; receiving information about treatments that match their interest, building trust over time.</p>
+        <div class="ctr"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg> 8% tap-through rate</div>
+      </div>
+    </div>
+
+    <div class="flow-stats">
+      <div class="fstat"><div class="val">100%</div><div class="lbl">Delivery rate</div></div>
+      <div class="fstat"><div class="val">54.1%</div><div class="lbl">Message open rate</div></div>
+      <div class="fstat"><div class="val">10.8%</div><div class="lbl">Click-through rate</div></div>
+      <div class="fstat"><div class="val">&lt;5s</div><div class="lbl">Response time</div></div>
+    </div>
+  </div>
+
+  <!-- second flow: keyword automation -->
+  <div style="margin-top:3rem" class="flow-canvas reveal d2">
+    <div class="flow-row">
+      <div class="flow-node">
+        <div class="fnode-box trigger">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="fnode-type">Trigger</div>
+          <div class="fnode-title">Patient comments a keyword</div>
+          <div class="fnode-detail">e.g. "SGB", "NAD+", "Ketamine" on your post</div>
+          <span class="fnode-badge">Comment trigger</span>
+        </div>
+      </div>
+      <div class="flow-connector"><div class="fc-arrow"></div></div>
+      <div class="flow-node">
+        <div class="fnode-box">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></div>
+          <div class="fnode-type">Auto DM</div>
+          <div class="fnode-title">Personalized info sent instantly</div>
+          <div class="fnode-detail">Treatment-specific message delivered to their inbox within seconds</div>
+          <span class="fnode-badge">&lt; 5 seconds</span>
+        </div>
+      </div>
+      <div class="flow-connector"><div class="fc-arrow"></div></div>
+      <div class="flow-node">
+        <div class="fnode-box">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div class="fnode-type">Education Sequence</div>
+          <div class="fnode-title">Treatment details + FAQ</div>
+          <div class="fnode-detail">Patient learns what to expect, pricing, and how to get started &mdash; all automated</div>
+        </div>
+      </div>
+      <div class="flow-connector"><div class="fc-arrow"></div></div>
+      <div class="flow-node">
+        <div class="fnode-box outcome">
+          <div class="fnode-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg></div>
+          <div class="fnode-type">Outcome</div>
+          <div class="fnode-title">Warm lead handed to staff</div>
+          <div class="fnode-detail">Only educated, interested patients reach your team &mdash; ready to book</div>
+          <span class="fnode-badge">High intent lead</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LANDING PAGES ─── -->
+<section class="section section-alt">
+  <div class="eyebrow reveal">Landing Pages</div>
+  <h2 class="display reveal d1">Treatment pages that <em>answer every question</em> before the first call</h2>
+  <p class="body-text reveal d2">Each page is designed around how patients actually research treatments &mdash; addressing fears, explaining the process, and making booking feel like the obvious next step.</p>
+  <div class="lp-grid">
+    <div class="lp-card reveal" onclick="openModal('mental-health.html','Mental Health &amp; Ketamine Therapy')">
+      <div class="lp-thumb" style="background:linear-gradient(135deg,#1e3a28,#3d5941)">
+        <span style="position:relative;z-index:1"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></span>
+      </div>
+      <div class="lp-body">
+        <h4>Mental Health &amp; Ketamine Therapy</h4>
+        <p>Covers ketamine infusions, SGB, ExoMind, and neurological wellness. Designed to reduce patient anxiety and move them toward booking.</p>
+        <button class="lp-view" onclick="event.stopPropagation();openModal('mental-health.html','Mental Health')">View Live <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+      </div>
+    </div>
+    <div class="lp-card reveal d1" onclick="openModal('wellness.html','Wellness &amp; Longevity')">
+      <div class="lp-thumb" style="background:linear-gradient(135deg,#1e2e3a,#2d4a6b)">
+        <span style="position:relative;z-index:1"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg></span>
+      </div>
+      <div class="lp-body">
+        <h4>Wellness &amp; Longevity Programs</h4>
+        <p>IV therapy, NAD+, peptides, and longevity packages. Positioned around optimization and peak performance.</p>
+        <button class="lp-view" onclick="event.stopPropagation();openModal('wellness.html','Wellness')">View Live <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+      </div>
+    </div>
+    <div class="lp-card reveal d2" onclick="openModal('pain-joint.html','Pain &amp; Joint Regeneration')">
+      <div class="lp-thumb" style="background:linear-gradient(135deg,#3a1e1e,#6b2d2d)">
+        <span style="position:relative;z-index:1"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M17 10c.7-.7 1.69-1 2.5-1a4.54 4.54 0 0 1 0 9 4.54 4.54 0 0 1-2.5-1"/><path d="M6 14c-.7.7-1.69 1-2.5 1a4.54 4.54 0 0 1 0-9 4.54 4.54 0 0 1 2.5 1"/><line x1="6" x2="17" y1="11" y2="13"/><line x1="6" x2="17" y1="13" y2="11"/></svg></span>
+      </div>
+      <div class="lp-body">
+        <h4>Pain &amp; Joint Regeneration</h4>
+        <p>Biologics, stem cells, and regenerative joint care. Targets patients actively researching alternatives to surgery.</p>
+        <button class="lp-view" onclick="event.stopPropagation();openModal('pain-joint.html','Pain &amp; Joint')">View Live <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+      </div>
+    </div>
+    <div class="lp-card reveal d3" onclick="openModal('weight-loss.html','Weight Loss &amp; GLP-1')">
+      <div class="lp-thumb" style="background:linear-gradient(135deg,#1e3a1e,#2d6b3a)">
+        <span style="position:relative;z-index:1"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+      </div>
+      <div class="lp-body">
+        <h4>Weight Loss &amp; GLP-1 Programs</h4>
+        <p>Medical weight loss and metabolic support. Optimized for high search volume GLP-1 and Semaglutide queries.</p>
+        <button class="lp-view" onclick="event.stopPropagation();openModal('weight-loss.html','Weight Loss')">View Live <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULTS ─── -->
+<section class="section section-dark" id="results">
+  <div class="eyebrow reveal">Results &amp; Case Studies</div>
+  <h2 class="display reveal d1">What clinics <em>achieve</em> with our systems</h2>
+  <div class="metrics-row">
+    <div class="metric reveal"><div class="big">3.2&times;</div><div class="desc">Average increase in consultation bookings within first 90 days</div></div>
+    <div class="metric reveal d1"><div class="big">&lt;60s</div><div class="desc">Response time to every new patient inquiry, around the clock</div></div>
+    <div class="metric reveal d2"><div class="big">54%</div><div class="desc">Average DM open rate on patient welcome sequences</div></div>
+    <div class="metric reveal d3"><div class="big">40hrs</div><div class="desc">Monthly staff hours saved through communication automation</div></div>
+  </div>
+  <div class="cases">
+    <div class="case-card reveal">
+      <span class="case-badge">Hawaii Wellness Clinic &middot; Honolulu &amp; Kona</span>
+      <h4>Full growth infrastructure for a leading regenerative medicine clinic</h4>
+      <p>Content system, patient communication automation, 4 landing pages, 11 educational videos, mobile app, and Linktree &mdash; a complete patient acquisition ecosystem built from the ground up.</p>
+      <div class="case-nums">
+        <div><div class="n">100%</div><div class="l">DM delivery rate</div></div>
+        <div><div class="n">54.1%</div><div class="l">Open rate</div></div>
+        <div><div class="n">11</div><div class="l">Educational videos</div></div>
+      </div>
+    </div>
+    <div class="case-card reveal d1">
+      <span class="case-badge">Ketamine &amp; Mental Health Clinic</span>
+      <h4>From scattered DMs to a fully automated patient intake system</h4>
+      <p>A ketamine therapy clinic was spending 15+ hours per week manually answering the same questions. We implemented a full automation and dedicated landing page system.</p>
+      <div class="case-nums">
+        <div><div class="n">+127%</div><div class="l">Consultations booked</div></div>
+        <div><div class="n">&minus;80%</div><div class="l">Manual response time</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY ─── -->
+<section class="section section-dark" id="why">
+  <div class="eyebrow reveal">Why Clinics Choose Us</div>
+  <h2 class="display reveal d1">Built exclusively for the <em>wellness and regenerative medicine</em> space</h2>
+  <div class="why-grid" style="margin-top:2.75rem">
+    <div class="wi reveal"><div class="wi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><h4>Niche Expertise</h4><p>We specialize exclusively in wellness and regenerative clinics. We know the patient psychology, the treatment landscape, and what actually converts.</p></div>
+    <div class="wi reveal d1"><div class="wi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></div><h4>Patient-First Messaging</h4><p>We understand how patients research treatments like ketamine or stem cells &mdash; and build every piece of content around their actual questions and concerns.</p></div>
+    <div class="wi reveal d2"><div class="wi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div><h4>Systems, Not Campaigns</h4><p>We build long-term digital infrastructure, not one-off ad campaigns. Your growth continues even when you&rsquo;re not actively spending on ads.</p></div>
+    <div class="wi reveal d1"><div class="wi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>Saves Staff Time</h4><p>Our automation gives your front desk hours back every week by handling repetitive inquiries and patient follow-up automatically.</p></div>
+    <div class="wi reveal d2"><div class="wi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><h4>Conversion Focused</h4><p>Every asset &mdash; every post, page, and message &mdash; is designed with one goal: turning online interest into booked consultations.</p></div>
+    <div class="wi reveal d3"><div class="wi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-1"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div><h4>True Partnership</h4><p>We embed ourselves in your growth. As your clinic evolves, we optimize and expand the systems continuously &mdash; not just at the start.</p></div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section" id="contact">
+  <div class="eyebrow reveal" style="justify-content:center">Let&rsquo;s Build Together</div>
+  <h2 reveal class="reveal">Ready to build your clinic&rsquo;s <em>growth infrastructure?</em></h2>
+  <p class="reveal d1">If you want to attract more patients, automate communication, and build a stronger digital presence &mdash; let&rsquo;s talk.</p>
+  <div class="cta-btns reveal d2">
+    <a href="/cdn-cgi/l/email-protection#94fcf1f8f8fbd4edf1f0fdfafbe7ede7e0f1f9e7baf7fbf9" class="btn-primary">Book a Strategy Call</a>
+    <a href="#portfolio" class="btn-ghost">See Our Work</a>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Yedino<em>.</em></div>
+  <div class="flinks">
+    <a href="#who">Who We Help</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#automation">Automation</a>
+    <a href="#results">Results</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="fcopy">&copy; 2025 Yedino Systems. All rights reserved.</div>
+</footer>
+
+<!-- MODAL -->
+<div class="mo" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="mb">
+    <div class="mh">
+      <h3 id="mtitle">Preview</h3>
+      <button class="mclose" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="mframe"><iframe id="mframe" src="" title="Preview" sandbox="allow-scripts allow-same-origin"></iframe></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function openModal(file,title){document.getElementById('mtitle').textContent=title;document.getElementById('mframe').src=file;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.getElementById('mframe').src='';document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()
