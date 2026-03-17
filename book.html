@@ -210,10 +210,6 @@
       <label for="service-dropdown">Service of Interest</label>
       <select id="service-dropdown" class="service-select">
         <option value="">Select a service</option>
-        <option value="mental-health">Mental Health</option>
-        <option value="wellness">Wellness and Vitality</option>
-        <option value="pain-joint">Pain and Joint</option>
-        <option value="weight-loss">Weight Loss</option>
       </select>
     </div>
 
@@ -263,16 +259,64 @@
 </footer>
 
 <script>
-  // Auto-select service from URL parameter
   (function() {
+    const services = {
+      'mental-health': [
+        { value: 'exomind-tms', label: 'ExoMind TMS' },
+        { value: 'ketamine-iv', label: 'Ketamine IV Therapy' },
+        { value: 'sgb', label: 'Stellate Ganglion Block' },
+        { value: 'esketamine', label: 'Esketamine (Spravato)' }
+      ],
+      'wellness': [
+        { value: 'iv-vitamin', label: 'IV Vitamin Therapy' },
+        { value: 'nad', label: 'NAD+ Therapy' },
+        { value: 'peptide', label: 'Peptide Therapy' },
+        { value: 'bhrt', label: 'Hormone Replacement (BHRT)' },
+        { value: 'sexual-health-prp', label: 'Sexual Health PRP' }
+      ],
+      'pain-joint': [
+        { value: 'regenerative-joint', label: 'Regenerative Joint Therapy' },
+        { value: 'back-pain', label: 'Back Pain' },
+        { value: 'knee-pain', label: 'Knee Pain' },
+        { value: 'shoulder-pain', label: 'Shoulder Pain' },
+        { value: 'hip-pain', label: 'Hip Pain' },
+        { value: 'shockwave', label: 'Shockwave Therapy' },
+        { value: 'class-iv-laser', label: 'Class IV Laser' }
+      ],
+      'weight-loss': [
+        { value: 'semaglutide', label: 'Semaglutide (GLP-1)' },
+        { value: 'tirzepatide', label: 'Tirzepatide (Mounjaro)' },
+        { value: 'retatrutide', label: 'Retatrutide (Triple Agonist)' }
+      ]
+    };
+
+    const dropdown = document.getElementById('service-dropdown');
     const params = new URLSearchParams(window.location.search);
-    const service = params.get('service');
-    if (service) {
-      const dropdown = document.getElementById('service-dropdown');
-      const option = dropdown.querySelector('option[value="' + service + '"]');
-      if (option) {
-        dropdown.value = service;
-      }
+    const category = params.get('service');
+
+    if (category && services[category]) {
+      // Show specific services for the selected category
+      dropdown.innerHTML = '<option value="">Select a service</option>';
+      services[category].forEach(function(s) {
+        var opt = document.createElement('option');
+        opt.value = s.value;
+        opt.textContent = s.label;
+        dropdown.appendChild(opt);
+      });
+    } else {
+      // No category — show all categories as groups
+      dropdown.innerHTML = '<option value="">Select a service</option>';
+      Object.keys(services).forEach(function(cat) {
+        var group = document.createElement('optgroup');
+        group.label = cat.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        services[cat].forEach(function(s) {
+          var opt = document.createElement('option');
+          opt.value = s.value;
+          opt.textContent = s.label;
+          group.appendChild(opt);
+        });
+        dropdown.appendChild(group);
+      });
     }
   })();
 </script>
