@@ -80,14 +80,14 @@
   .page-header p { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.78); max-width: 460px; }
   .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex-shrink: 0; }
   .btn-primary {
-    background: linear-gradient(135deg, var(--coral), #c96444);
+    background: #1B3D8F;
     color: white; padding: 15px 36px; border-radius: 50px;
     font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
     text-decoration: none; display: inline-block;
     transition: transform 0.2s, box-shadow 0.25s;
-    box-shadow: 0 6px 24px rgba(224,122,95,0.4); white-space: nowrap;
+    box-shadow: 0 6px 24px rgba(27,61,143,0.4); white-space: nowrap;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(224,122,95,0.5); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(27,61,143,0.5); }
   .btn-ghost {
     color: rgba(255,255,255,0.7); font-size: 0.78rem; letter-spacing: 0.06em;
     text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;
@@ -233,8 +233,8 @@
   .form-input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--sand-dark); background: var(--white); border-radius: 8px; outline: none; font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text); transition: border-color 0.2s; appearance: none; }
   .form-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(58,174,160,0.1); }
   .form-input::placeholder { color: var(--muted); opacity: 0.6; }
-  .form-submit { width: 100%; background: linear-gradient(135deg, var(--coral), #c96444); color: white; padding: 16px; border: none; border-radius: 50px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: transform 0.2s, box-shadow 0.2s; margin-top: 8px; box-shadow: 0 6px 20px rgba(224,122,95,0.35); }
-  .form-submit:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(224,122,95,0.45); }
+  .form-submit { width: 100%; background: #1B3D8F; color: white; padding: 16px; border: none; border-radius: 50px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: transform 0.2s, box-shadow 0.2s; margin-top: 8px; box-shadow: 0 6px 20px rgba(27,61,143,0.35); }
+  .form-submit:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(27,61,143,0.45); }
   .form-note { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 12px; }
 
   /* FOOTER */
@@ -642,43 +642,26 @@
       📞 (808) 201-2343
     </p>
   </div>
-  <div class="booking-right">
-    <div class="booking-form">
-      <div class="form-title">Free Phone Consultation</div>
-      <div class="form-row">
-        <label class="form-label">Full Name</label>
-        <input type="text" class="form-input" placeholder="Your full name">
-      </div>
-      <div class="form-row">
-        <label class="form-label">Phone Number</label>
-        <input type="tel" class="form-input" placeholder="(808) 000-0000">
-      </div>
-      <div class="form-row">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="your@email.com">
-      </div>
-      <div class="form-row">
-        <label class="form-label">Program of Interest</label>
-        <select class="form-input">
-          <option value="">Not sure yet — need guidance</option>
-          <option>Medical Weight Loss Overview</option>
-          <option>Semaglutide (GLP-1) Program</option>
-          <option>Tirzepatide (Mounjaro) Program</option>
-          <option>Retatrutide (Triple Agonist)</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Preferred Location</label>
-        <select class="form-input">
-          <option>Honolulu</option>
-          <option>Kailua Kona</option>
-          <option>Hilo</option>
-        </select>
-      </div>
-      <button class="form-submit">Request My Free Consultation</button>
-      <p class="form-note">🔒 Your information is private and secure. We'll call you within 24 hours.</p>
-    </div>
+  <div style="width:100%;max-width:560px;min-height:850px;">
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/YTmOGFzuBxKThJA0bnz3"
+      style="width:100%;height:850px;border:none;border-radius:8px"
+      id="inline-YTmOGFzuBxKThJA0bnz3"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Social Media Landing Pages"
+      data-height="807"
+      data-layout-iframe-id="inline-YTmOGFzuBxKThJA0bnz3"
+      data-form-id="YTmOGFzuBxKThJA0bnz3"
+      title="Social Media Landing Pages">
+    </iframe>
   </div>
+  <script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </section>
 
 <!-- FOOTER -->
