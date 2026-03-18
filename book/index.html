@@ -78,90 +78,15 @@
 
   /* ── MAIN CONTENT ── */
   .booking-content {
-    max-width: 960px; margin: 0 auto;
+    max-width: 720px; margin: 0 auto;
     padding: 40px 32px 80px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-    align-items: start;
   }
 
-  /* ── LEFT: CALENDAR ── */
-  .booking-left {}
-
-  .service-select-row { margin-bottom: 32px; }
-  .service-select-row label {
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); display: block; margin-bottom: 8px;
-  }
-  .service-select {
-    width: 100%; padding: 13px 16px;
-    border: 1.5px solid var(--sand-dark);
-    background: var(--white); border-radius: 8px; outline: none;
-    font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text);
-    transition: border-color 0.2s; appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235a7a6a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-  }
-  .service-select:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(58,174,160,0.1); }
-
-  .calendar-placeholder {
-    background: var(--sand);
-    border: 2px dashed var(--sand-dark);
-    border-radius: 16px;
-    min-height: 480px;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 16px;
-    padding: 40px;
-  }
-  .calendar-placeholder .cal-icon {
-    width: 64px; height: 64px;
-    background: linear-gradient(135deg, var(--ocean), var(--teal));
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .calendar-placeholder .cal-label {
-    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted); text-align: center;
-  }
-
-  /* ── RIGHT: FORM ── */
-  .booking-form {
-    background: var(--sand);
-    border: 1px solid var(--sand-dark);
-    padding: 40px; border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(27,79,110,0.08);
-  }
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; color: var(--ocean-dark);
-    margin-bottom: 28px; text-align: center;
-  }
-  .form-label {
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); display: block; margin-bottom: 6px;
-  }
-  .form-row { margin-bottom: 16px; }
-  .form-input {
-    width: 100%; padding: 13px 16px;
-    border: 1.5px solid var(--sand-dark);
-    background: var(--white); border-radius: 8px; outline: none;
-    font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--text);
-    transition: border-color 0.2s; appearance: none;
-  }
-  .form-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(58,174,160,0.1); }
-  .form-input::placeholder { color: var(--muted); opacity: 0.6; }
-  .form-submit {
+  /* ── GHL FORM EMBED ── */
+  .ghl-form-container {
+    min-height: 850px;
     width: 100%;
-    background: linear-gradient(135deg, var(--coral), #c96444);
-    color: white; padding: 16px; border: none; border-radius: 50px; cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; margin-top: 8px;
-    box-shadow: 0 6px 20px rgba(224,122,95,0.35);
   }
-  .form-submit:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(224,122,95,0.45); }
-  .form-note { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 12px; }
 
   /* ── FOOTER ── */
   footer {
@@ -181,7 +106,7 @@
   @media (max-width: 960px) {
     nav { padding: 14px 20px; }
     .page-header { padding: 100px 24px 48px; }
-    .booking-content { grid-template-columns: 1fr; padding: 32px 20px 60px; gap: 32px; }
+    .booking-content { padding: 32px 20px 60px; }
     footer { padding: 28px 24px; }
   }
 </style>
@@ -204,48 +129,26 @@
 <!-- BOOKING CONTENT -->
 <div class="booking-content">
 
-  <!-- LEFT: Service selector + Calendar -->
-  <div class="booking-left">
-    <div class="service-select-row">
-      <label for="service-dropdown">Service of Interest</label>
-      <select id="service-dropdown" class="service-select">
-        <option value="">Select a service</option>
-      </select>
-    </div>
-
-    <div class="calendar-placeholder">
-      <div class="cal-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
-      </div>
-      <div class="cal-label">
-        <!-- GHL CALENDAR EMBED CODE HERE -->
-        Calendar embed will appear here
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT: Contact form -->
-  <div class="booking-form">
-    <div class="form-title">Your Information</div>
-    <div class="form-row">
-      <label class="form-label">Full Name</label>
-      <input type="text" class="form-input" placeholder="Jane Smith">
-    </div>
-    <div class="form-row">
-      <label class="form-label">Phone Number</label>
-      <input type="tel" class="form-input" placeholder="(808) 000-0000">
-    </div>
-    <div class="form-row">
-      <label class="form-label">Email Address</label>
-      <input type="email" class="form-input" placeholder="jane@email.com">
-    </div>
-    <button class="form-submit">Submit</button>
-    <div class="form-note">Your information is private and secure. We'll confirm within 24 hours.</div>
+  <!-- GHL Form Embed -->
+  <div class="ghl-form-container">
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/YTmOGFzuBxKThJA0bnz3"
+      style="width:100%;height:100%;border:none;border-radius:3px"
+      id="inline-YTmOGFzuBxKThJA0bnz3"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Social Media Landing Pages"
+      data-height="807"
+      data-layout-iframe-id="inline-YTmOGFzuBxKThJA0bnz3"
+      data-form-id="YTmOGFzuBxKThJA0bnz3"
+      title="Social Media Landing Pages">
+    </iframe>
+    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
   </div>
 
 </div>
@@ -258,67 +161,5 @@
   <div class="footer-copy">&copy; 2025 Hawaii Wellness Clinic. All rights reserved.</div>
 </footer>
 
-<script>
-  (function() {
-    const services = {
-      'mental-health': [
-        { value: 'exomind-tms', label: 'ExoMind TMS' },
-        { value: 'ketamine-iv', label: 'Ketamine IV Therapy' },
-        { value: 'sgb', label: 'Stellate Ganglion Block' },
-        { value: 'esketamine', label: 'Esketamine (Spravato)' }
-      ],
-      'wellness': [
-        { value: 'iv-vitamin', label: 'IV Vitamin Therapy' },
-        { value: 'nad', label: 'NAD+ Therapy' },
-        { value: 'peptide', label: 'Peptide Therapy' },
-        { value: 'bhrt', label: 'Hormone Replacement (BHRT)' },
-        { value: 'sexual-health-prp', label: 'Sexual Health PRP' }
-      ],
-      'pain-joint': [
-        { value: 'regenerative-joint', label: 'Regenerative Joint Therapy' },
-        { value: 'back-pain', label: 'Back Pain' },
-        { value: 'knee-pain', label: 'Knee Pain' },
-        { value: 'shoulder-pain', label: 'Shoulder Pain' },
-        { value: 'hip-pain', label: 'Hip Pain' },
-        { value: 'shockwave', label: 'Shockwave Therapy' },
-        { value: 'class-iv-laser', label: 'Class IV Laser' }
-      ],
-      'weight-loss': [
-        { value: 'semaglutide', label: 'Semaglutide (GLP-1)' },
-        { value: 'tirzepatide', label: 'Tirzepatide (Mounjaro)' },
-        { value: 'retatrutide', label: 'Retatrutide (Triple Agonist)' }
-      ]
-    };
-
-    const dropdown = document.getElementById('service-dropdown');
-    const params = new URLSearchParams(window.location.search);
-    const category = params.get('service');
-
-    if (category && services[category]) {
-      // Show specific services for the selected category
-      dropdown.innerHTML = '<option value="">Select a service</option>';
-      services[category].forEach(function(s) {
-        var opt = document.createElement('option');
-        opt.value = s.value;
-        opt.textContent = s.label;
-        dropdown.appendChild(opt);
-      });
-    } else {
-      // No category — show all categories as groups
-      dropdown.innerHTML = '<option value="">Select a service</option>';
-      Object.keys(services).forEach(function(cat) {
-        var group = document.createElement('optgroup');
-        group.label = cat.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-        services[cat].forEach(function(s) {
-          var opt = document.createElement('option');
-          opt.value = s.value;
-          opt.textContent = s.label;
-          group.appendChild(opt);
-        });
-        dropdown.appendChild(group);
-      });
-    }
-  })();
-</script>
 </body>
 </html>
