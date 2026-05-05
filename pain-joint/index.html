@@ -232,6 +232,56 @@
   }
   .btn-read:hover, .btn-read.active { border-color: var(--teal); color: var(--teal); background: rgba(58,174,160,0.06); }
 
+  /* ── VIDEO PATIENT STORIES ── */
+  .video-stories {
+    grid-column: 1 / -1; position: relative; overflow: hidden;
+    padding: 72px 48px;
+    background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean) 55%, var(--teal) 130%);
+    text-align: center; color: white;
+  }
+  .video-stories::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(58,174,160,0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(168,216,211,0.12), transparent 50%);
+    pointer-events: none;
+  }
+  .video-stories-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; }
+  .vs-eyebrow { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .vs-eyebrow .vs-line { width: 28px; height: 1px; background: rgba(168,216,211,0.5); }
+  .vs-eyebrow .vs-label { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--teal-light); }
+  .video-stories h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 2.8vw, 2.4rem); font-weight: 400;
+    color: white; margin-bottom: 12px; line-height: 1.2;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.25);
+  }
+  .video-stories h3 em { font-style: italic; color: var(--teal-light); }
+  .video-stories .vs-sub {
+    font-size: 0.93rem; line-height: 1.7; color: rgba(255,255,255,0.78);
+    max-width: 560px; margin: 0 auto 44px;
+  }
+  .video-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+  }
+  .video-card {
+    position: relative; aspect-ratio: 9/16;
+    border-radius: 14px; overflow: hidden;
+    background: var(--ocean-dark);
+    border: 1px solid rgba(168,216,211,0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .video-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.45); }
+  .video-card iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-card .vc-tag {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    background: rgba(13,47,66,0.7); backdrop-filter: blur(8px);
+    color: var(--teal-light); padding: 4px 12px; border-radius: 50px;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    border: 1px solid rgba(58,174,160,0.3); pointer-events: none;
+  }
+
   /* ── TESTIMONIAL STRIP ── */
   .testimonial-strip { position: relative; overflow: hidden; padding: 80px 64px; }
   .testimonial-bg {
@@ -288,6 +338,8 @@
     .service-card { border-right: none; }
     .service-card.full-width { flex-direction: column; }
     .service-card.full-width .service-media-slot { width: 100%; aspect-ratio: 16/9; border-right: none; border-bottom: 1px solid var(--border); }
+    .video-stories { padding: 56px 24px; }
+    .video-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
     .testimonial-strip { padding: 56px 24px; }
     .booking { grid-template-columns: 1fr; padding: 64px 24px; gap: 40px; }
     footer { padding: 28px 24px; }
@@ -364,10 +416,10 @@
     <div class="service-card">
       <div class="service-media-slot">
         <span class="service-num-badge">01 — Overview</span>
-        <img src="/pain-joint/pain-01-joint.jpg" alt="Regenerative Joint Therapies">
+        <img src="/pain-joint/pain-01-joint.jpg" alt="Regenerative & Stem Cell Therapy">
       </div>
       <div class="service-body">
-        <h3 class="service-name">Regenerative Joint Therapies</h3>
+        <h3 class="service-name">Regenerative & Stem Cell Therapy</h3>
         <p class="service-desc">Advanced, non-surgical treatments that help your body heal naturally — relieving pain, restoring mobility, and rebuilding joint health using your body's own biologic potential.</p>
         <div class="read-more-content" id="expand-rjt">
           <div style="height:240px;border-radius:10px;overflow:hidden;margin:20px 0;">
@@ -780,6 +832,37 @@
         <div class="service-actions">
           <a href="/book?service=pain-joint" class="btn-book">Book Consultation</a>
           <button class="btn-read" onclick="toggleExpand('expand-neuro', this)">Read More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO PATIENT STORIES -->
+    <div class="video-stories">
+      <div class="video-stories-inner">
+        <div class="vs-eyebrow">
+          <span class="vs-line"></span>
+          <span class="vs-label">Patient Stories</span>
+          <span class="vs-line"></span>
+        </div>
+        <h3>Real People. <em>Real Results.</em></h3>
+        <p class="vs-sub">Hear directly from patients who moved from chronic pain back to the life they love — without surgery.</p>
+        <div class="video-grid">
+          <div class="video-card">
+            <span class="vc-tag">Story 01</span>
+            <iframe src="https://player.vimeo.com/video/1116262592" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 1"></iframe>
+          </div>
+          <div class="video-card">
+            <span class="vc-tag">Story 02</span>
+            <iframe src="https://player.vimeo.com/video/1146748896" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 2"></iframe>
+          </div>
+          <div class="video-card">
+            <span class="vc-tag">Story 03</span>
+            <iframe src="https://player.vimeo.com/video/1166553937" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 3"></iframe>
+          </div>
+          <div class="video-card">
+            <span class="vc-tag">Story 04</span>
+            <iframe src="https://player.vimeo.com/video/1166551076" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 4"></iframe>
+          </div>
         </div>
       </div>
     </div>
