@@ -276,6 +276,8 @@
   .video-card iframe { width: 100%; height: 100%; border: 0; display: block; }
   .video-card.is-wide { aspect-ratio: 16/9; }
   .video-card.is-tall { aspect-ratio: 9/16; width: 260px; flex: 0 0 auto; }
+  .video-stories--inline { padding: 56px 48px; }
+  .video-stories--inline .vs-eyebrow { margin-bottom: 28px; }
   .video-card .vc-tag {
     position: absolute; top: 14px; left: 14px; z-index: 2;
     background: rgba(13,47,66,0.7); backdrop-filter: blur(8px);
@@ -367,7 +369,7 @@
     <div class="header-left">
       <div class="category-tag"><span>Pain & Joint Solutions</span></div>
       <h1>Move freely.<br><em>Heal naturally.</em><br>No surgery needed.</h1>
-      <p>Advanced, non-surgical regenerative therapies for joints, spine, nerves, and chronic pain — delivered by board-certified specialists in Honolulu, Kona, and Maui.</p>
+      <p>Advanced regenerative and stem cell therapies for joints, spine, nerves, and chronic pain — delivered by board-certified specialists in Honolulu and Kona.</p>
     </div>
     <div class="header-right">
       <a href="/book?service=pain-joint" class="btn-primary">Book a Consultation</a>
@@ -418,16 +420,6 @@
         <div class="video-card is-wide">
           <span class="vc-tag">Story 02</span>
           <iframe src="https://player.vimeo.com/video/1146748896" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 2"></iframe>
-        </div>
-      </div>
-      <div class="video-row-tall">
-        <div class="video-card is-tall">
-          <span class="vc-tag">Story 03</span>
-          <iframe src="https://player.vimeo.com/video/1166553937" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 3"></iframe>
-        </div>
-        <div class="video-card is-tall">
-          <span class="vc-tag">Story 04</span>
-          <iframe src="https://player.vimeo.com/video/1166551076" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 4"></iframe>
         </div>
       </div>
     </div>
@@ -871,6 +863,29 @@
         <div class="service-actions">
           <a href="/book?service=pain-joint" class="btn-book">Book Consultation</a>
           <button class="btn-read" onclick="toggleExpand('expand-neuro', this)">Read More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERTICAL VIDEO STORIES -->
+    <div class="video-stories video-stories--inline">
+      <div class="video-stories-inner">
+        <div class="vs-eyebrow">
+          <span class="vs-line"></span>
+          <span class="vs-label">More Patient Stories</span>
+          <span class="vs-line"></span>
+        </div>
+        <div class="video-grid">
+          <div class="video-row-tall">
+            <div class="video-card is-tall">
+              <span class="vc-tag">Story 03</span>
+              <iframe src="https://player.vimeo.com/video/1166553937" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 3"></iframe>
+            </div>
+            <div class="video-card is-tall">
+              <span class="vc-tag">Story 04</span>
+              <iframe src="https://player.vimeo.com/video/1166551076" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" allowfullscreen title="Patient Story 4"></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </div>
