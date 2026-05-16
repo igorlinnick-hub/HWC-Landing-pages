@@ -542,6 +542,16 @@
 
   /* ============ VIDEO CARD ============ */
 
+  .video-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media (min-width: 700px) {
+    .video-row { grid-template-columns: 1fr 1fr; }
+  }
+
   .video-card {
     position: relative;
     border-radius: var(--radius);
@@ -553,14 +563,18 @@
     box-shadow: var(--shadow-glass);
     opacity: 0;
     animation: fadeUp 0.7s var(--d, 0.7s) both;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 3;
     cursor: pointer;
+  }
+
+  @media (min-width: 700px) {
+    .video-card { aspect-ratio: 16 / 11; }
   }
 
   .video-poster {
     position: absolute;
     inset: 0;
-    background: #0d2f42 url('https://vumbnail.com/1116262592.jpg') center/cover no-repeat;
+    background: #0d2f42 center/cover no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -960,15 +974,28 @@
     <div class="divider-line"></div>
   </div>
 
-  <!-- ============ VIDEO CARD ============ -->
-  <div class="video-card" id="videoCard" data-vimeo="1116262592" style="--d:.75s">
-    <div class="video-poster">
-      <div class="video-play" aria-label="Play patient story">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <!-- ============ VIDEO CARDS ============ -->
+  <div class="video-row">
+    <div class="video-card" data-vimeo="1146748896" data-thumb="https://vumbnail.com/1146748896.jpg" style="--d:.75s">
+      <div class="video-poster">
+        <div class="video-play" aria-label="Play John's testimonial">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-meta">
+          <div class="video-eyebrow">Patient Story · Stem Cells</div>
+          <div class="video-title">John's recovery.</div>
+        </div>
       </div>
-      <div class="video-meta">
-        <div class="video-eyebrow">Patient Story · 2 min</div>
-        <div class="video-title">Real patient. Real result.</div>
+    </div>
+    <div class="video-card" data-vimeo="1116262592" data-thumb="https://vumbnail.com/1116262592.jpg" style="--d:.82s">
+      <div class="video-poster">
+        <div class="video-play" aria-label="Play wellness story">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-meta">
+          <div class="video-eyebrow">Patient Story · Wellness</div>
+          <div class="video-title">Real patient. Real result.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1173,19 +1200,22 @@
 
   // ============ LITE VIMEO ============
   (function() {
-    const card = document.getElementById('videoCard');
-    if (!card) return;
-    card.addEventListener('click', function() {
-      const id = card.dataset.vimeo;
-      const iframe = document.createElement('iframe');
-      iframe.src = 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0';
-      iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
-      iframe.setAttribute('allowfullscreen', '');
-      iframe.setAttribute('title', 'Patient Story');
-      card.appendChild(iframe);
+    document.querySelectorAll('.video-card').forEach(card => {
+      const thumb = card.dataset.thumb;
       const poster = card.querySelector('.video-poster');
-      if (poster) poster.style.opacity = '0';
-    }, { once: true });
+      if (thumb && poster) poster.style.backgroundImage = "url('" + thumb + "')";
+      card.addEventListener('click', function() {
+        const id = card.dataset.vimeo;
+        if (!id) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0';
+        iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('title', 'Patient Story');
+        card.appendChild(iframe);
+        if (poster) poster.style.opacity = '0';
+      }, { once: true });
+    });
   })();
 </script>
 
