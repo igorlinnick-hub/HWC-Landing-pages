@@ -45,7 +45,10 @@
 
   .bg-hero {
     position: fixed;
-    inset: 0;
+    top: -200px;
+    left: 0;
+    right: 0;
+    bottom: -1200px;
     z-index: -3;
     background: url('/wellness/palm-beach-golden.jpg') center/cover no-repeat;
     transform: scale(1.05);
@@ -807,10 +810,6 @@
     .quiz, .contact { padding: 20px; }
   }
 
-  /* On iOS, fixed bg breaks — use scroll fallback */
-  @supports (-webkit-touch-callout: none) {
-    .bg-hero { position: absolute; height: 200vh; }
-  }
 </style>
 </head>
 <body>
@@ -1047,7 +1046,7 @@
     let ticking = false;
     function update() {
       const y = window.scrollY;
-      heroEl.style.transform = `translateY(${y * 0.3}px) scale(1.05)`;
+      heroEl.style.transform = `translateY(${-y * 0.2}px) scale(1.05)`;
       ticking = false;
     }
     window.addEventListener('scroll', function() {
