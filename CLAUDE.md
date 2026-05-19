@@ -107,16 +107,16 @@ Crew-template session periodically runs `/audit HWC-Landing-pages` which reads `
 
 Files in `.crew-learnings/` are NEVER deleted by the harvester — they're the historical record.
 
-## Pending work (as of 2026-05-18)
+## Conversion model
 
-From `crew-template/archetypes/landing-funnel/improvements.md`:
+The **only** conversion path on every landing is the embedded GHL form (form ID `YTmOGFzuBxKThJA0bnz3`). GHL captures lead source from UTM parameters on inbound links — so lead-source data lives in the GHL CRM, not in any on-site analytics. No Vercel Analytics, GA, PostHog, or A/B testing infra is used or wanted. When prioritizing work, focus on form discoverability, page speed, copy clarity, mobile UX, and SEO — not measurement.
+
+## Pending work
 
 | # | Item | Priority |
 |---|---|---|
-| 1 | Wire Vercel Web Analytics on /aloha | HIGH |
-| 2 | Vimeo IDs → videos.json config | HIGH |
-| 3 | Socials/phone/addresses → brand-config.json | MED |
-| 4 | A/B testing setup (depends on #1) | MED |
-| 5 | Consolidate `/assets/` folder | LOW |
+| 1 | Vimeo IDs → `videos.json` config | HIGH |
+| 2 | Socials/phone/addresses → `brand-config.json` | MED |
+| 3 | Consolidate `/assets/` folder | LOW |
 
 Plus: waiting on Philip for DNS CNAME `aloha.hawaiiwellnessclinic.com → cname.vercel-dns.com`.
