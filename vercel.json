@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "aloha.hawaiiwellnessclinic.com" }],
+      "destination": "/aloha"
+    }
+  ]
+}
