@@ -3,7 +3,12 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "aloha.hawaiiwellnessclinic.com" }],
-      "destination": "/aloha"
+      "destination": "/aloha/index.html"
+    },
+    {
+      "source": "/index.html",
+      "has": [{ "type": "host", "value": "aloha.hawaiiwellnessclinic.com" }],
+      "destination": "/aloha/index.html"
     }
   ]
 }
