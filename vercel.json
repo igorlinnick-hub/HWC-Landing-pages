@@ -1,14 +1,10 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
       "has": [{ "type": "host", "value": "aloha.hawaiiwellnessclinic.com" }],
-      "destination": "/aloha/index.html"
-    },
-    {
-      "source": "/index.html",
-      "has": [{ "type": "host", "value": "aloha.hawaiiwellnessclinic.com" }],
-      "destination": "/aloha/index.html"
+      "destination": "/aloha",
+      "permanent": false
     }
   ]
 }
