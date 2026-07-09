@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#0d2f42">
+<title>Hawaii Wellness Clinic — Your Wellness Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────── */
+:root{
+  --ocean:#1b4f6e;--ocean-dark:#0d2f42;
+  --teal:#3aaea0;--teal-light:#a8d8d3;--teal-glow:rgba(58,174,160,.35);
+  --coral:#e07a5f;--coral-light:#f0a48a;
+  --sand:#f5ede0;--white:#fdfcfa;
+  --glass-border:rgba(58,174,160,.24);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --radius:18px;
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--white);background:var(--ocean-dark);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ─── BACKGROUND ─────────────────────────────────────── */
+.bg-hero{position:fixed;inset:0;z-index:-3;background:url('../wellness/palm-beach-golden.jpg') center/cover no-repeat;transform:scale(1.04)}
+.bg-overlay{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at top,rgba(13,47,66,.55) 0%,rgba(13,47,66,.9) 55%,rgba(13,47,66,.98) 100%)}
+.bg-mesh{position:fixed;inset:-10%;z-index:-1;background:radial-gradient(circle at 20% 30%,rgba(58,174,160,.26) 0%,transparent 42%),radial-gradient(circle at 80% 72%,rgba(224,122,95,.18) 0%,transparent 44%);mix-blend-mode:soft-light;opacity:.7}
+
+/* ─── PROGRESS ───────────────────────────────────────── */
+.progress-wrap{position:fixed;top:0;left:0;right:0;z-index:100}
+.progress-track{height:3px;background:rgba(255,255,255,.1)}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--coral));transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px var(--teal-glow);width:0%}
+.step-counter{position:fixed;top:calc(env(safe-area-inset-top,0) + 14px);right:18px;z-index:100;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(168,216,211,.6);font-weight:500}
+.back-btn{position:fixed;top:calc(env(safe-area-inset-top,0) + 10px);left:16px;z-index:100;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:6px 14px;color:rgba(255,255,255,.7);font-size:.75rem;cursor:pointer;display:none;font-family:var(--sans);letter-spacing:.05em;transition:all .25s;backdrop-filter:blur(10px)}
+.back-btn:hover{background:rgba(255,255,255,.14)}
+.back-btn.visible{display:block}
+
+/* ─── LAYOUT ─────────────────────────────────────────── */
+.quiz-wrap{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:78px 20px 56px}
+.steps-container{position:relative;width:100%;max-width:544px;overflow:hidden}
+.step{position:absolute;top:0;left:0;right:0;transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .35s;will-change:transform,opacity}
+.step.active{position:relative;transform:translateX(0);opacity:1}
+.step.exit-left{transform:translateX(-110%);opacity:0;pointer-events:none}
+.step.enter-right{transform:translateX(110%);opacity:0;pointer-events:none}
+.step.exit-right{transform:translateX(110%);opacity:0;pointer-events:none}
+.step.enter-left{transform:translateX(-110%);opacity:0;pointer-events:none}
+
+/* ─── STEP HEAD ──────────────────────────────────────── */
+.hero-illus{width:212px;height:150px;margin:0 auto 20px;border-radius:24px;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,rgba(58,174,160,.14) 55%,rgba(27,79,110,.32) 100%);border:1px solid rgba(168,216,211,.34);box-shadow:0 14px 44px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.2);overflow:visible;animation:popIn .55s var(--ease-spring) both}
+.hero-illus svg{width:88%;height:88%;overflow:visible;position:relative;z-index:1}
+.hero-glow{position:absolute;inset:0;border-radius:24px;background:radial-gradient(circle at 50% 44%,rgba(58,174,160,.3),transparent 66%);pointer-events:none}
+.step-q{font-family:var(--serif);font-size:clamp(1.45rem,5vw,2rem);font-weight:400;line-height:1.22;text-align:center;margin-bottom:8px;animation:fadeUp .5s .08s both}
+.step-q em{font-style:italic;color:var(--teal-light)}
+.step-sub{font-size:.82rem;color:rgba(168,216,211,.7);text-align:center;margin-bottom:26px;letter-spacing:.03em;animation:fadeUp .5s .14s both}
+
+/* ─── CHOICES ────────────────────────────────────────── */
+.choices{display:flex;flex-direction:column;gap:10px;animation:fadeUp .5s .2s both}
+.choices.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{
+  display:flex;align-items:center;gap:13px;padding:13px 16px;
+  background:linear-gradient(135deg,rgba(255,255,255,.09) 0%,rgba(27,79,110,.28) 100%);
+  border:1px solid var(--glass-border);border-radius:14px;
+  cursor:pointer;user-select:none;-webkit-user-select:none;
+  transition:transform .28s var(--ease-spring),border-color .25s,box-shadow .25s,background .25s;
+  transform:translateZ(0);-webkit-backface-visibility:hidden;
+  position:relative;overflow:hidden;
+}
+.choice:hover{
+  background:linear-gradient(135deg,rgba(58,174,160,.24) 0%,rgba(27,79,110,.4) 100%);
+  border-color:rgba(58,174,160,.5);
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(0,0,0,.32);
+}
+.choice.selected{
+  background:linear-gradient(135deg,rgba(58,174,160,.34) 0%,rgba(27,79,110,.46) 100%);
+  border-color:var(--teal);
+  box-shadow:0 0 0 1px var(--teal),0 10px 32px rgba(0,0,0,.34);
+  transform:translateY(-1px);
+}
+.choice.selected .choice-check{opacity:1;transform:scale(1)}
+.choice.selected .choice-icon{background:rgba(58,174,160,.32);border-color:var(--teal);color:#fff}
+.choice-icon{width:40px;height:40px;border-radius:11px;background:rgba(58,174,160,.14);border:1px solid rgba(58,174,160,.26);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal-light);transition:all .25s}
+.choice-icon svg{width:20px;height:20px}
+.choice-text{font-size:.9rem;line-height:1.35;flex:1}
+.choice-text strong{display:block;font-weight:600;font-size:.92rem;color:var(--white)}
+.choice-text span{font-size:.77rem;color:rgba(168,216,211,.68);margin-top:2px;display:block}
+.choice-check{width:20px;height:20px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.4);transition:all .25s var(--ease-spring);flex-shrink:0;color:#fff}
+.choice-check svg{width:12px;height:12px}
+.choices.grid-2 .choice{flex-direction:column;text-align:center;padding:18px 12px;gap:10px}
+.choices.grid-2 .choice-icon{width:46px;height:46px}
+.choices.grid-2 .choice-icon svg{width:24px;height:24px}
+.choices.grid-2 .choice-text{font-size:.84rem}
+.choices.grid-2 .choice-check{display:none}
+
+/* ─── SLIDER ─────────────────────────────────────────── */
+.slider-wrap{animation:fadeUp .5s .2s both;padding:0 4px}
+.slider-value-display{text-align:center;margin-bottom:22px}
+.slider-number{font-family:var(--serif);font-size:4rem;line-height:1;color:var(--teal);text-shadow:0 0 40px var(--teal-glow);transition:color .3s}
+.slider-word{font-size:.9rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-top:10px;transition:color .3s}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:100px;outline:none;cursor:pointer;background:rgba(255,255,255,.12)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,var(--teal) 0%,var(--ocean) 100%);box-shadow:0 0 0 3px rgba(58,174,160,.4),0 4px 16px rgba(0,0,0,.4);cursor:pointer;transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:active{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;border:none;background:radial-gradient(circle,var(--teal),var(--ocean));box-shadow:0 0 0 3px rgba(58,174,160,.4);cursor:pointer}
+.slider-labels{display:flex;justify-content:space-between;margin-top:10px;font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:.04em}
+
+/* ─── RATING METER (urgency) ─────────────────────────── */
+.rating{animation:fadeUp .5s .2s both;display:flex;flex-direction:column;align-items:center;gap:22px}
+.rating-bars{display:flex;align-items:flex-end;gap:11px;height:132px}
+.rating-bar{width:50px;border-radius:12px 12px 7px 7px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;color:rgba(255,255,255,.35);font-size:.85rem;font-weight:600;transition:all .3s var(--ease-spring);position:relative;overflow:hidden}
+.rating-bar:hover{transform:translateY(-4px);border-color:rgba(58,174,160,.4)}
+.rating-bar.on{background:linear-gradient(180deg,var(--coral) 0%,var(--teal) 100%);border-color:transparent;color:#fff;box-shadow:0 6px 22px rgba(58,174,160,.35)}
+.rating-label{font-family:var(--serif);font-size:1.35rem;color:var(--teal-light);min-height:1.8rem;transition:all .3s var(--ease-spring);text-align:center}
+
+/* ─── NEXT BTN ───────────────────────────────────────── */
+.next-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;margin-top:20px;background:linear-gradient(135deg,var(--teal) 0%,#2a9080 100%);border:none;border-radius:14px;color:#fff;font-size:1rem;font-weight:600;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;box-shadow:0 6px 28px rgba(58,174,160,.35);transition:all .28s var(--ease-spring);animation:fadeUp .5s .3s both}
+.next-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(58,174,160,.45)}
+.next-btn svg{width:18px;height:18px;transition:transform .25s}
+.next-btn:hover svg{transform:translateX(4px)}
+
+/* ─── LOGO ───────────────────────────────────────────── */
+.quiz-logo{text-align:center;margin-bottom:20px;animation:fadeDown .6s .05s both}
+.quiz-logo img{width:92px;filter:drop-shadow(0 4px 20px rgba(0,0,0,.5))}
+.quiz-logo p{font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.9);font-weight:500;margin-top:9px;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+
+/* ─── RESULTS ────────────────────────────────────────── */
+#results{display:none;position:relative;z-index:10;max-width:544px;width:100%;margin:0 auto;padding:58px 20px 80px;text-align:center}
+#results.visible{display:block}
+.results-orb{width:118px;height:118px;border-radius:50%;background:conic-gradient(var(--teal) 0%,var(--coral) 50%,var(--teal) 100%);margin:0 auto 26px;animation:spinOrb 2s linear infinite,popIn .5s var(--ease-spring) both;filter:drop-shadow(0 0 30px var(--teal-glow));position:relative}
+.results-orb::after{content:'';position:absolute;inset:8px;border-radius:50%;background:var(--ocean-dark)}
+.results-orb span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;z-index:2;animation:counterSpin 2s linear infinite}
+.results-orb span svg{width:34px;height:34px}
+@keyframes spinOrb{to{transform:rotate(360deg)}}
+@keyframes counterSpin{to{transform:rotate(-360deg)}}
+.analyzing-text{font-family:var(--serif);font-size:1.3rem;color:var(--teal-light);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.7}50%{opacity:1}}
+.profile-reveal{display:none}
+.profile-reveal.visible{display:block}
+.result-title{font-family:var(--serif);font-size:clamp(1.7rem,6vw,2.3rem);font-weight:400;line-height:1.2;margin-bottom:8px;animation:fadeUp .6s var(--ease-spring) both}
+.result-title em{font-style:italic;color:var(--teal-light)}
+.result-sub{font-size:.82rem;color:rgba(168,216,211,.7);letter-spacing:.05em;margin-bottom:22px;animation:fadeUp .6s .1s both}
+.profile-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px;animation:fadeUp .6s .2s both}
+.profile-tag{padding:6px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(58,174,160,.3);font-size:.75rem;letter-spacing:.06em;color:var(--teal-light)}
+
+/* B12 gift */
+.b12-gift{display:flex;align-items:center;gap:16px;text-align:left;background:linear-gradient(135deg,rgba(58,174,160,.15) 0%,rgba(224,122,95,.1) 100%);border:1px solid rgba(58,174,160,.4);border-radius:18px;padding:20px 22px;margin-bottom:30px;box-shadow:0 0 0 1px rgba(58,174,160,.12),0 12px 40px rgba(0,0,0,.3);animation:popIn .6s .3s var(--ease-spring) both}
+.b12-badge{width:52px;height:52px;border-radius:14px;background:rgba(58,174,160,.2);border:1px solid rgba(58,174,160,.4);display:flex;align-items:center;justify-content:center;color:var(--teal-light);flex-shrink:0}
+.b12-badge svg{width:26px;height:26px}
+.b12-title{font-family:var(--serif);font-size:1.25rem;color:var(--white);margin-bottom:2px}
+.b12-sub{font-size:.8rem;color:rgba(168,216,211,.8);line-height:1.4}
+.b12-value{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:3px 11px;border-radius:100px;background:rgba(58,174,160,.2);border:1px solid rgba(58,174,160,.4);font-size:.72rem;color:var(--teal-light);letter-spacing:.05em}
+.b12-value svg{width:12px;height:12px}
+
+/* Veteran toggle */
+.vet-toggle{display:flex;align-items:center;gap:13px;text-align:left;padding:14px 18px;margin-bottom:22px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(27,79,110,.28));border:1px solid var(--glass-border);cursor:pointer;transition:all .3s var(--ease-spring);animation:fadeUp .5s .45s both;transform:translateZ(0)}
+.vet-toggle:hover{border-color:rgba(58,174,160,.5)}
+.vet-toggle.active{background:linear-gradient(135deg,rgba(58,174,160,.28),rgba(224,122,95,.14));border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 8px 28px rgba(0,0,0,.3)}
+.vet-toggle-icon{width:38px;height:38px;border-radius:10px;background:rgba(58,174,160,.16);border:1px solid rgba(58,174,160,.3);display:flex;align-items:center;justify-content:center;color:var(--teal-light);flex-shrink:0;transition:all .25s}
+.vet-toggle-icon svg{width:20px;height:20px}
+.vet-toggle.active .vet-toggle-icon{background:rgba(58,174,160,.34);border-color:var(--teal);color:#fff}
+.vet-toggle-text{flex:1}
+.vet-toggle-text strong{display:block;font-size:.9rem;font-weight:600;color:var(--white)}
+.vet-toggle-text span{font-size:.76rem;color:rgba(168,216,211,.72)}
+.vet-switch{width:46px;height:26px;border-radius:100px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);flex-shrink:0;position:relative;transition:all .3s var(--ease-spring)}
+.vet-toggle.active .vet-switch{background:var(--teal);border-color:var(--teal)}
+.vet-knob{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:all .3s var(--ease-spring)}
+.vet-toggle.active .vet-knob{left:22px}
+.offers-label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(168,216,211,.5);margin-bottom:18px;animation:fadeUp .5s .5s both}
+.offers-grid{display:flex;flex-direction:column;gap:14px;animation:fadeUp .5s .55s both}
+.offer-card{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(27,79,110,.28));border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px;text-align:left;cursor:pointer;transition:all .3s var(--ease-spring);position:relative;overflow:hidden;transform:translateZ(0)}
+.offer-card:hover{border-color:rgba(58,174,160,.5);transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.offer-card.selected{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal),0 14px 40px rgba(0,0,0,.4)}
+.offer-badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.offer-badge.popular{background:rgba(224,122,95,.25);color:var(--coral-light);border:1px solid rgba(224,122,95,.3)}
+.offer-badge.best{background:rgba(58,174,160,.2);color:var(--teal-light);border:1px solid rgba(58,174,160,.3)}
+.offer-badge.value{background:rgba(168,216,211,.15);color:var(--teal-light);border:1px solid rgba(168,216,211,.2)}
+.offer-name{font-family:var(--serif);font-size:1.2rem;margin-bottom:10px;line-height:1.25}
+.offer-includes{list-style:none;margin-bottom:14px;display:flex;flex-direction:column;gap:5px}
+.offer-includes li{font-size:.8rem;color:rgba(255,255,255,.75);display:flex;align-items:flex-start;gap:7px}
+.offer-includes li svg{width:14px;height:14px;color:var(--teal);flex-shrink:0;margin-top:2px}
+.offer-pricing{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.offer-retail{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:line-through}
+.offer-price{font-size:1.5rem;font-weight:700;color:var(--white);font-family:var(--serif)}
+.offer-match{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.offer-match-bar{flex:1;height:4px;border-radius:100px;background:rgba(255,255,255,.1);overflow:hidden}
+.offer-match-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--teal),var(--coral))}
+.offer-match-pct{font-size:.72rem;color:rgba(168,216,211,.7)}
+.offer-cta{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--teal) 0%,#2a9080 100%);border:none;color:#fff;font-family:var(--sans);font-size:.9rem;font-weight:600;letter-spacing:.04em;cursor:pointer;box-shadow:0 4px 20px rgba(58,174,160,.3);transition:all .28s var(--ease-spring)}
+.offer-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,174,160,.45)}
+
+.claim-form{display:none;margin-top:28px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(27,79,110,.28));border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;animation:fadeUp .5s var(--ease-spring) both}
+.claim-form.visible{display:block}
+.claim-form h3{font-family:var(--serif);font-size:1.25rem;margin-bottom:16px;text-align:center}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(168,216,211,.7);margin-bottom:6px}
+.form-group input{width:100%;padding:13px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:12px;color:var(--white);font-family:var(--sans);font-size:.95rem;transition:border-color .25s;outline:none}
+.form-group input::placeholder{color:rgba(255,255,255,.3)}
+.form-group input:focus{border-color:var(--teal);background:rgba(58,174,160,.07)}
+.form-submit{width:100%;padding:16px;margin-top:8px;background:linear-gradient(135deg,var(--teal) 0%,var(--ocean) 100%);border:none;border-radius:14px;color:#fff;font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:.04em;box-shadow:0 8px 30px rgba(58,174,160,.4);transition:all .28s var(--ease-spring)}
+.form-submit:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(58,174,160,.5)}
+.form-note{font-size:.72rem;color:rgba(255,255,255,.4);text-align:center;margin-top:10px;line-height:1.5}
+
+#particles-canvas{position:fixed;inset:0;pointer-events:none;z-index:200}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.hidden{display:none!important}
+@media(max-width:400px){.choices.grid-2{grid-template-columns:1fr}.rating-bar{width:42px}}
+</style>
+</head>
+<body>
+<div class="bg-hero"></div>
+<div class="bg-overlay"></div>
+<div class="bg-mesh"></div>
+<canvas id="particles-canvas"></canvas>
+
+<div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+<div class="step-counter" id="stepCounter">1 / 8</div>
+<button class="back-btn" id="backBtn" onclick="goBack()">← Back</button>
+
+<div class="quiz-wrap" id="quizWrap">
+  <div class="quiz-logo">
+    <img src="../mental-health/logo.png" alt="Hawaii Wellness Clinic" onerror="this.style.display='none'">
+    <p>Wellness Profile</p>
+  </div>
+  <div class="steps-container" id="stepsContainer"></div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div id="analyzingPhase">
+    <div class="results-orb"><span id="orbIcon"></span></div>
+    <div class="analyzing-text">Analyzing your profile…</div>
+  </div>
+  <div class="profile-reveal" id="profileReveal">
+    <div class="result-title">Your <em>Wellness Profile</em><br>is ready</div>
+    <div class="result-sub">Personalized for you · Hawaii Wellness Clinic</div>
+    <div class="profile-tags" id="profileTags"></div>
+    <div class="b12-gift">
+      <div class="b12-badge" id="giftIcon"></div>
+      <div>
+        <div class="b12-title">Your Gift is Confirmed</div>
+        <div class="b12-sub">Free B12 Injection — $40 value<br>Included with any offer below</div>
+        <div class="b12-value" id="giftCheck"> Claimed · No strings attached</div>
+      </div>
+    </div>
+    <div class="vet-toggle" id="vetToggle" onclick="toggleVeteran()">
+      <div class="vet-toggle-icon" id="vetIcon"></div>
+      <div class="vet-toggle-text"><strong>Veteran or active military?</strong><span id="vetSub">Tap to unlock your veteran pricing 🎖️</span></div>
+      <div class="vet-switch"><div class="vet-knob"></div></div>
+    </div>
+    <div class="offers-label">Your personalized offers — choose one</div>
+    <div class="offers-grid" id="offersGrid"></div>
+    <div class="claim-form" id="claimForm">
+      <h3>Claim Your B12 + Offer</h3>
+      <div class="form-group"><label>Your Name</label><input type="text" placeholder="First name" id="formName"></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(808) 555-0000" id="formPhone"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com" id="formEmail"></div>
+      <button class="form-submit" onclick="submitClaim()">Book My Free B12 + Offer →</button>
+      <p class="form-note">We'll call or text you within 24 hours to confirm your spot.<br>No spam, ever.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── ICON LIBRARY (feather-style line icons) ────────── */
+const I = {
+  plane:'<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/>',
+  sprout:'<path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12C12 8 9 6 5 6c0 4 3 6 7 6Z"/><path d="M12 12c0-3 2-5 6-5 0 3-2 5-6 5Z"/>',
+  palm:'<circle cx="12" cy="12" r="3.4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/>',
+  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6"/>',
+  weight:'<circle cx="12" cy="6" r="2.2"/><path d="M8.5 8.5h7l2 11.5H6.5l2-11.5Z"/>',
+  activity:'<path d="M22 12h-4l-3 8L9 4l-3 8H2"/>',
+  zap:'<path d="M13 2 4 14h7l-1 8 10-12h-7l1-8Z"/>',
+  heartpulse:'<path d="M20 8.5a5 5 0 0 0-9-3 5 5 0 0 0-9 3c0 5.5 9 11 9 11s9-5.5 9-11Z"/><path d="M3.6 12H8l1.5-2.5L12 15l1.6-3H18"/>',
+  leaf:'<path d="M11 20A7 7 0 0 1 4 13C4 7 11 4 20 4c0 9-4 16-9 16Z"/><path d="M11 20c0-5 3-9 7-11"/>',
+  sparkle:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+  mountain:'<path d="M3 20 10 6l3.5 6.5L16 8l5 12Z"/>',
+  utensils:'<path d="M4 3v6a2 2 0 0 0 4 0V3"/><path d="M6 9v12"/><path d="M17 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4v9"/>',
+  pill:'<path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7Z"/><path d="M8.5 8.5 15.5 15.5"/>',
+  droplet:'<path d="M12 3s6 5.5 6 11a6 6 0 0 1-12 0c0-5.5 6-11 6-11Z"/>',
+  clinic:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+  clipboard:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M8.5 11h7M8.5 15h4"/>',
+  star:'<path d="M12 3.5 14.6 9l6 .8-4.4 4.1 1.1 5.9L12 17l-5.3 2.8 1.1-5.9L3.4 9.8l6-.8L12 3.5Z"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  building:'<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01M9 16h6"/>',
+  flame:'<path d="M12 2c1.5 3.5 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.5 1.5 1.5 2 2.5 2C13 8 13 5 12 2Z"/>',
+  sunrise:'<path d="M12 3v5M5.5 9.5 7 11M18.5 9.5 17 11M2 15h20M4 19h16"/><path d="M8 15a4 4 0 0 1 8 0"/>',
+  waves:'<path d="M2 7c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 13c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 19c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>',
+  smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/>',
+  moon:'<path d="M21 12.5A8.5 8.5 0 1 1 11.5 3 6.5 6.5 0 0 0 21 12.5Z"/>',
+  users:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16 3.7a3.2 3.2 0 0 1 0 6.1"/><path d="M21 20c0-2.6-1.7-4.6-4.2-5.2"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4"/>',
+  gauge:'<path d="M12 14 16 9"/><circle cx="12" cy="14" r="1.5"/><path d="M4 18a8 8 0 1 1 16 0"/>',
+  gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9"/><path d="M12 8v13"/><path d="M12 8S11 3 8 3a2.5 2.5 0 0 0 0 5h4Z"/><path d="M12 8s1-5 4-5a2.5 2.5 0 0 1 0 5h-4Z"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  arrow:'<path d="M5 12h14M12 5l7 7-7 7"/>',
+  medal:'<circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.5 6.5 22l5.5-3.2L17.5 22l-2-8.5"/>'
+};
+function svg(name,cls){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${I[name]||''}</svg>`}
+
+/* ─── HERO ILLUSTRATIONS (Sprout-style medical spot art) ─ */
+const ACC = `<path d="M36 25v12M30 31h12" stroke="#a8d8d3" stroke-opacity=".5" stroke-width="1.7"/><path d="M160 29l2.3 5.2 5.2 2.3-5.2 2.3-2.3 5.2-2.3-5.2-5.2-2.3 5.2-2.3z" fill="#a8d8d3" fill-opacity=".45" stroke="none"/><circle cx="40" cy="121" r="3.2" fill="#3aaea0" fill-opacity=".55" stroke="none"/><path d="M159 113l7 7M166 113l-7 7" stroke="#a8d8d3" stroke-opacity=".45" stroke-width="1.7"/><circle cx="150" cy="129" r="2" fill="#e07a5f" fill-opacity=".55" stroke="none"/>`;
+function hero(motif){return `<svg viewBox="0 0 200 150" fill="none" stroke="#3aaea0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${ACC}${motif}</svg>`}
+const HERO = {
+  // island / how long home — location pin + waves
+  q1:hero(`<path d="M100 42a19 19 0 0 0-19 19c0 14 19 30 19 30s19-16 19-30a19 19 0 0 0-19-19Z"/><circle cx="100" cy="61" r="7" fill="#e07a5f" stroke="none"/><path d="M62 110q9.5-7 19 0t19 0 19 0" stroke="#a8d8d3" stroke-opacity=".8" stroke-width="2"/>`),
+  // goal — heart + pulse
+  q2:hero(`<path d="M100 101S68 83 68 58a17 17 0 0 1 32-7 17 17 0 0 1 32 7c0 25-32 43-32 43Z"/><path d="M70 63h12l6-13 9 26 6-13h19" stroke="#e07a5f" stroke-width="2.4"/>`),
+  // duration — hourglass
+  q3:hero(`<path d="M76 42h48M76 106h48"/><path d="M81 42c0 20 19 24 19 31 0-7 19-11 19-31"/><path d="M81 106c0-20 19-24 19-31 0 7 19 11 19 31"/><circle cx="100" cy="74" r="3.6" fill="#e07a5f" stroke="none"/>`),
+  // impact — gauge
+  q4:hero(`<path d="M60 104a40 40 0 1 1 80 0"/><path d="M100 104l24-22" stroke="#e07a5f" stroke-width="2.6"/><circle cx="100" cy="104" r="5" fill="#3aaea0" stroke="none"/><path d="M64 88l7 4M100 62v8M136 88l-7 4" stroke="#a8d8d3" stroke-opacity=".7" stroke-width="1.8"/>`),
+  // tried — magnifier + list
+  q5:hero(`<circle cx="91" cy="65" r="25"/><path d="M110 84l19 19" stroke-width="2.6"/><path d="M81 58h20M81 66h20M81 74h13" stroke="#a8d8d3" stroke-opacity=".85" stroke-width="2"/>`),
+  // been to HWC — clinic + cross
+  q6:hero(`<rect x="66" y="56" width="68" height="52" rx="3"/><rect x="90" y="40" width="20" height="20" rx="3" fill="#e07a5f" stroke="none"/><path d="M100 45v10M95 50h10" stroke="#fff" stroke-width="2.2"/><rect x="75" y="70" width="10" height="10" rx="1.5" stroke-width="1.8"/><rect x="115" y="70" width="10" height="10" rx="1.5" stroke-width="1.8"/><path d="M92 108V92h16v16"/>`),
+  // urgency — alarm clock + rising arrow
+  q7:hero(`<circle cx="95" cy="73" r="26"/><path d="M77 52c-6-6-6-12 0-16M113 52c6-6 6-12 0-16" stroke-width="2"/><path d="M95 73V59M95 73l11 6" stroke="#e07a5f" stroke-width="2.4"/><circle cx="95" cy="73" r="3" fill="#e07a5f" stroke="none"/><path d="M126 98l14-14M133 84h7v7" stroke="#a8d8d3" stroke-opacity=".8" stroke-width="2"/>`),
+  // unlocks — sunrise + waves
+  q8:hero(`<path d="M78 94a22 22 0 0 1 44 0" fill="#e07a5f" fill-opacity=".85" stroke="none"/><path d="M75 94a25 25 0 0 1 50 0"/><path d="M100 56v-9M73 70l-6-6M127 70l6-6M60 94h-8M148 94h8" stroke="#a8d8d3" stroke-opacity=".8" stroke-width="2"/><path d="M60 106h80" stroke="#a8d8d3" stroke-opacity=".7"/><path d="M66 118q8.5-6 17 0t17 0 17 0" stroke="#a8d8d3" stroke-opacity=".8" stroke-width="2"/>`),
+};
+
+/* ─── QUESTIONS DATA (8) ─────────────────────────────── */
+const QUESTIONS = [
+  { key:'q1', type:'single', icon:'palm',
+    q:'How long have you called <em>Hawaiʻi home?</em>',
+    sub:'This helps us understand your wellness journey on the island',
+    opts:[
+      {icon:'plane', t:'Just visiting', s:'Exploring while I\'m here', v:'visitor'},
+      {icon:'sprout', t:'Less than 2 years', s:'Still finding my roots here', v:'new'},
+      {icon:'home', t:'2–5 years', s:'Settled into island life', v:'mid'},
+      {icon:'star', t:'5+ years / Born here', s:'Kamaʻāina — this is home', v:'kama'},
+    ]},
+  { key:'q2', type:'grid', icon:'target',
+    q:'What\'s your <em>primary health goal?</em>',
+    sub:'This shapes your entire personalized plan',
+    opts:[
+      {icon:'weight', t:'Lose weight the right way', v:'weight'},
+      {icon:'activity', t:'Relieve chronic pain or joints', v:'pain'},
+      {icon:'zap', t:'More energy & mental clarity', v:'energy'},
+      {icon:'heartpulse', t:'Reduce stress or low mood', v:'mental'},
+      {icon:'leaf', t:'Slow aging & stay vital', v:'longevity'},
+      {icon:'sparkle', t:'Look refreshed & confident', v:'aesthetic'},
+    ]},
+  { key:'q3', type:'single', icon:'clock',
+    q:'How long have you been <em>dealing with this?</em>',
+    sub:'Helps us know how deep to go in your protocol',
+    opts:[
+      {icon:'sprout', t:'Just starting to notice it', s:'Less than a few months', v:'new'},
+      {icon:'waves', t:'6 months – 2 years', s:'It\'s been affecting my life', v:'mid'},
+      {icon:'mountain', t:'3+ years — tried a lot already', s:'Nothing has worked long-term', v:'long'},
+    ]},
+  { key:'q4', type:'slider', icon:'gauge',
+    q:'How much does this affect <em>your daily life?</em>',
+    sub:'Be honest — this helps us find the right intensity of care',
+    lo:'Barely noticeable', hi:'Life-changing impact' },
+  { key:'q5', type:'multi', icon:'search',
+    q:'What have you <em>already tried?</em>',
+    sub:'Select all that apply — no judgment here',
+    opts:[
+      {icon:'utensils', t:'Diet and exercise', s:'Lifestyle changes', v:'diet'},
+      {icon:'pill', t:'Prescription medications', s:'Doctor-prescribed treatments', v:'rx'},
+      {icon:'droplet', t:'Supplements or vitamins', s:'OTC wellness products', v:'supps'},
+      {icon:'clinic', t:'Other clinics or specialists', s:'Previous professional care', v:'clinic'},
+      {icon:'leaf', t:'Nothing yet', s:'This would be my first step', v:'nothing'},
+    ]},
+  { key:'q6', type:'single', icon:'building',
+    q:'Have you visited <em>Hawaii Wellness Clinic</em> before?',
+    sub:'So we can personalize your welcome',
+    opts:[
+      {icon:'user', t:'Never been', s:'This would be my first visit', v:'never'},
+      {icon:'clipboard', t:'Had a consultation', s:'Talked to the team before', v:'consult'},
+      {icon:'star', t:'Yes, I\'m a current patient', s:'Love what you do', v:'patient'},
+    ]},
+  { key:'q7', type:'rating', icon:'flame',
+    q:'How soon do you want to <em>solve this?</em>',
+    sub:'Tap the meter — this tells us how fast to move for you',
+    labels:['Just exploring','Sometime soon','Within a month or two','This month','As soon as possible'] },
+  { key:'q8', type:'multi', icon:'sunrise',
+    q:'What would <em>solving this unlock</em> for you?',
+    sub:'Pick everything that resonates — this is your why',
+    opts:[
+      {icon:'waves', t:'Being active again', s:'Beach, hiking, surfing', v:'active'},
+      {icon:'smile', t:'Confidence in my body', s:'Feeling good in my own skin', v:'confident'},
+      {icon:'moon', t:'Better sleep & energy', s:'Waking up actually rested', v:'sleep'},
+      {icon:'users', t:'Time with people I love', s:'Being present, not in pain', v:'family'},
+      {icon:'sun', t:'Feeling like myself again', s:'That version I remember', v:'myself'},
+    ]},
+];
+
+/* ─── STATE ──────────────────────────────────────────── */
+const state = { current:1, total:QUESTIONS.length, answers:{}, selectedOffer:null, veteran:false };
+const impactWords = {
+  1:['Mild','#a8d8d3'],2:['Mild','#a8d8d3'],3:['Manageable','#6fc9bd'],4:['Noticeable','#3aaea0'],
+  5:['Noticeable','#3aaea0'],6:['Disruptive','#e8a488'],7:['Disruptive','#e8a488'],
+  8:['Severe','#e07a5f'],9:['Severe','#e07a5f'],10:['Overwhelming','#d85c3d']
+};
+
+/* ─── RENDER STEPS ───────────────────────────────────── */
+function renderSteps(){
+  const c = document.getElementById('stepsContainer');
+  c.innerHTML = QUESTIONS.map((Q,i)=>{
+    const n=i+1, active=n===1?'active':'enter-right';
+    let body='';
+    if(Q.type==='single'||Q.type==='grid'){
+      const grid=Q.type==='grid'?' grid-2':'';
+      body=`<div class="choices${grid}">`+Q.opts.map(o=>`
+        <div class="choice" onclick="selectChoice(this,'${Q.key}','${o.v}')">
+          <div class="choice-icon">${svg(o.icon)}</div>
+          <div class="choice-text"><strong>${o.t}</strong>${o.s?`<span>${o.s}</span>`:''}</div>
+          <div class="choice-check">${svg('check')}</div>
+        </div>`).join('')+`</div>`;
+    } else if(Q.type==='multi'){
+      body=`<div class="choices">`+Q.opts.map(o=>`
+        <div class="choice" onclick="toggleMulti(this,'${Q.key}','${o.v}')">
+          <div class="choice-icon">${svg(o.icon)}</div>
+          <div class="choice-text"><strong>${o.t}</strong>${o.s?`<span>${o.s}</span>`:''}</div>
+          <div class="choice-check">${svg('check')}</div>
+        </div>`).join('')+`</div>
+        <button class="next-btn" onclick="nextStep()">Continue ${svg('arrow')}</button>`;
+    } else if(Q.type==='slider'){
+      body=`<div class="slider-wrap">
+        <div class="slider-value-display">
+          <div class="slider-number" id="sv_${Q.key}">5</div>
+          <div class="slider-word" id="sw_${Q.key}">Noticeable</div>
+        </div>
+        <input type="range" min="1" max="10" value="5" id="sl_${Q.key}" oninput="updateSlider('${Q.key}')">
+        <div class="slider-labels"><span>${Q.lo}</span><span>${Q.hi}</span></div>
+      </div>
+      <button class="next-btn" onclick="nextStep()">Continue ${svg('arrow')}</button>`;
+    } else if(Q.type==='rating'){
+      const heights=[52,72,92,112,132];
+      body=`<div class="rating">
+        <div class="rating-bars">`+[1,2,3,4,5].map(v=>`
+          <div class="rating-bar" data-v="${v}" style="height:${heights[v-1]}px" onclick="selectRating('${Q.key}',${v})">${v}</div>`).join('')+`
+        </div>
+        <div class="rating-label" id="rl_${Q.key}">Tap to choose</div>
+      </div>`;
+    }
+    return `<div class="step ${active}" data-step="${n}">
+      <div class="hero-illus"><div class="hero-glow"></div>${HERO[Q.key]||svg(Q.icon)}</div>
+      <h2 class="step-q">${Q.q}</h2>
+      <p class="step-sub">${Q.sub}</p>
+      ${body}
+    </div>`;
+  }).join('');
+}
+
+/* ─── NAV ────────────────────────────────────────────── */
+function updateProgress(){
+  document.getElementById('progressFill').style.width=(((state.current-1)/state.total)*100)+'%';
+  document.getElementById('stepCounter').textContent=state.current+' / '+state.total;
+  document.getElementById('backBtn').classList.toggle('visible',state.current>1);
+}
+const getStep=n=>document.querySelector(`.step[data-step="${n}"]`);
+function goTo(n,dir){
+  const curr=getStep(state.current),next=getStep(n); if(!next)return;
+  curr.classList.remove('active');
+  curr.classList.add(dir==='forward'?'exit-left':'exit-right');
+  next.classList.remove('enter-right','enter-left','exit-left','exit-right');
+  next.classList.add(dir==='forward'?'enter-right':'enter-left');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    next.classList.remove('enter-right','enter-left'); next.classList.add('active');
+  }));
+  state.current=n; updateProgress();
+}
+function nextStep(){ state.current<state.total ? goTo(state.current+1,'forward') : showResults(); }
+function goBack(){ if(state.current>1) goTo(state.current-1,'back'); }
+
+/* ─── INTERACTIONS ───────────────────────────────────── */
+function selectChoice(el,key,val){
+  el.closest('.choices').querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected'); state.answers[key]=val;
+  setTimeout(nextStep,380);
+}
+function toggleMulti(el,key,val){
+  el.classList.toggle('selected');
+  if(!state.answers[key])state.answers[key]=[];
+  const idx=state.answers[key].indexOf(val);
+  idx>-1?state.answers[key].splice(idx,1):state.answers[key].push(val);
+}
+function updateSlider(key){
+  const v=parseInt(document.getElementById('sl_'+key).value);
+  const [word,color]=impactWords[v];
+  document.getElementById('sv_'+key).textContent=v;
+  document.getElementById('sv_'+key).style.color=color;
+  document.getElementById('sw_'+key).textContent=word;
+  document.getElementById('sw_'+key).style.color=color;
+  state.answers[key]=v;
+  const pct=((v-1)/9)*100;
+  document.getElementById('sl_'+key).style.background=`linear-gradient(to right,var(--teal) 0%,var(--coral) ${pct}%,rgba(255,255,255,.12) ${pct}%)`;
+}
+function selectRating(key,v){
+  state.answers[key]=v;
+  const step=getStep(state.current);
+  step.querySelectorAll('.rating-bar').forEach(b=>{
+    b.classList.toggle('on', parseInt(b.dataset.v)<=v);
+  });
+  step.querySelector('#rl_'+key).textContent=QUESTIONS.find(q=>q.key===key).labels[v-1];
+  setTimeout(nextStep,520);
+}
+
+/* ─── OFFERS ─────────────────────────────────────────── */
+/* Prices: retail = list, mem = member floor (-30/-50/-10%), vet = veteran floor.
+   HIGH-MARGIN (weight/energy/mental/aesthetic) can discount deep.
+   LOW-MARGIN (pain/longevity biologics, -10/-20%) lead with consult, keep product at floor. */
+const OFFERS={
+  weight:[
+    {badge:'popular',badgeText:'Most Popular',name:'Semaglutide — First Month',includes:['4 Semaglutide injections','Metabolic consultation','Personalized dosing plan'],retail:'$399',mem:'$279',vet:'$200',match:96,cta:'Start My Weight Loss Journey'},
+    {badge:'best',badgeText:'Best Results',name:'Tirzepatide — First Month',includes:['4 Tirzepatide injections','Full metabolic assessment','Body composition analysis'],retail:'$599',mem:'$419',vet:'$300',match:88,cta:'Fast-Track My Results'},
+    {badge:'value',badgeText:'Quick Start',name:'Weight Loss Booster',includes:['Weight Loss Booster injection','Nutrition consultation','30-day follow-up plan'],retail:'$100',mem:'$70',vet:'$50',match:79,cta:'Boost My Metabolism'}
+  ],
+  pain:[
+    {badge:'popular',badgeText:'Start Here',name:'Pain Relief Assessment',includes:['Full pain & joint consultation','Provider exam + treatment mapping','First Shockwave or Laser session'],retail:'$250',mem:'$99',vet:'$79',match:95,cta:'Start Feeling Better'},
+    {badge:'best',badgeText:'Best for Chronic Pain',name:'Shockwave 6-Session Package',includes:['6 Shockwave Therapy sessions','Progress tracking each visit','Personalized recovery plan'],retail:'$840',mem:'$680',vet:'$605',match:90,cta:'Commit to Relief'},
+    {badge:'value',badgeText:'Regenerative',name:'PRP Joint Session',includes:['Single PRP injection','Joint & mobility assessment','Regenerative roadmap'],retail:'$900',mem:'$810',vet:'$720',match:84,cta:'Explore Regenerative Care'}
+  ],
+  energy:[
+    {badge:'popular',badgeText:'Most Popular',name:'NAD+ Energy Reset',includes:['NAD+ 100mg injection','Wellness consultation','Energy optimization plan'],retail:'$100',mem:'$70',vet:'$50',match:94,cta:'Reset My Energy'},
+    {badge:'best',badgeText:'Best Value',name:'IV Vitality Drip',includes:["Myer's Cocktail IV drip",'25+ vitamins & minerals','Immediate energy boost'],retail:'$246',mem:'$172',vet:'$123',match:89,cta:'Claim My IV Drip'},
+    {badge:'value',badgeText:'Longevity',name:'Peptide Starter Stack',includes:['Curated peptide protocol','30-min specialist consultation','Custom compound plan'],retail:'$270',mem:'$189',vet:'$135',match:82,cta:'Start My Peptide Journey'}
+  ],
+  mental:[
+    {badge:'popular',badgeText:'Most Popular',name:'Exomind Session',includes:['First Exomind session','Mental clarity assessment','Personalized protocol'],retail:'$400',mem:'$280',vet:'$200',match:93,cta:'Clear My Mind'},
+    {badge:'best',badgeText:'Deep Relief',name:'Ketamine — First Session',includes:['Full mental health assessment','First Ketamine session','Personalized treatment plan'],retail:'$800',mem:'$560',vet:'$400',match:88,cta:'Explore Ketamine Therapy'},
+    {badge:'value',badgeText:'Low Commitment',name:'Mental Health Consultation',includes:['1-on-1 provider assessment','Ketamine / SGB / Exomind eligibility','Custom treatment roadmap'],retail:'$150',mem:'$99',vet:'$79',match:85,cta:'Book My Consultation'}
+  ],
+  longevity:[
+    {badge:'popular',badgeText:'Start Here',name:'Regenerative Consultation',includes:['1-on-1 longevity consultation','Biologic & peptide eligibility','Personalized regen blueprint'],retail:'$250',mem:'$99',vet:'$79',match:94,cta:'Build My Blueprint'},
+    {badge:'value',badgeText:'Affordable Biologic',name:'PRP Session',includes:['Single PRP injection','Regenerative assessment','Longevity protocol design'],retail:'$900',mem:'$810',vet:'$720',match:87,cta:'Try Regenerative Medicine'},
+    {badge:'best',badgeText:'Premium',name:'Nano Exosome Therapy',includes:['Nano AER 50bil exosome injection','Anti-aging consultation','Full longevity protocol'],retail:'$2,000',mem:'$1,800',vet:'$1,600',match:82,cta:'Experience Stem Cell Therapy'}
+  ],
+  aesthetic:[
+    {badge:'popular',badgeText:'Most Popular',name:'Botox — 20 Units',includes:['20 units of Botox','Facial assessment with provider','Personalized aesthetic plan'],retail:'$260',mem:'$180',vet:'$140',match:93,cta:'Look & Feel Refreshed'},
+    {badge:'best',badgeText:'Glow Up',name:'Sculptra Treatment',includes:['Single Sculptra treatment','Custom facial mapping','Before-photo documentation'],retail:'$1,000',mem:'$700',vet:'$500',match:87,cta:'Start My Glow Journey'},
+    {badge:'value',badgeText:'Low Commitment',name:'Aesthetic Consultation',includes:['1-on-1 aesthetic assessment','Botox / filler / hair eligibility','Personalized treatment plan'],retail:'$100',mem:'$49',vet:'$39',match:81,cta:'Book My Consultation'}
+  ]
+};
+
+/* ─── PROFILE TAGS ───────────────────────────────────── */
+function buildProfileTags(){
+  const tags=[], a=state.answers;
+  const goalMap={weight:'Weight Loss Journey',pain:'Pain Relief Seeker',energy:'Energy Optimizer',mental:'Mental Wellness',longevity:'Longevity Explorer',aesthetic:'Aesthetic Glow'};
+  if(a.q2)tags.push(goalMap[a.q2]||'Wellness Seeker');
+  if(a.q3==='long')tags.push('Long-term challenge');
+  if((a.q4||0)>=7)tags.push('High impact on life');
+  if((a.q7||0)>=4)tags.push('Ready to act now');
+  if(a.q6==='patient')tags.push('HWC Community Member');
+  if(a.q6==='never')tags.push('New to HWC');
+  return tags;
+}
+
+/* ─── RESULTS ────────────────────────────────────────── */
+function showResults(){
+  document.getElementById('quizWrap').style.display='none';
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('stepCounter').textContent='✦';
+  document.getElementById('backBtn').classList.remove('visible');
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('orbIcon').innerHTML=svg('sparkle');
+  setTimeout(()=>{
+    document.getElementById('analyzingPhase').style.display='none';
+    buildProfileReveal();
+    document.getElementById('profileReveal').classList.add('visible');
+    shootConfetti();
+  },2500);
+}
+let currentSet=[];
+const priceOf=o=>state.veteran?o.vet:o.mem;
+function buildProfileReveal(){
+  document.getElementById('giftIcon').innerHTML=svg('gift');
+  document.getElementById('giftCheck').innerHTML=svg('check')+' Claimed · No strings attached';
+  document.getElementById('vetIcon').innerHTML=svg('medal');
+  const tagsEl=document.getElementById('profileTags');
+  tagsEl.innerHTML=buildProfileTags().map(t=>`<div class="profile-tag">${t}</div>`).join('');
+  const goal=state.answers.q2||'energy';
+  currentSet=OFFERS[goal]||OFFERS.energy;
+  renderOffers();
+}
+function renderOffers(){
+  document.getElementById('offersGrid').innerHTML=currentSet.map((o,i)=>`
+    <div class="offer-card${state.selectedOffer===i?' selected':''}" onclick="selectOffer(this,${i})">
+      <div class="offer-badge ${o.badge}">${o.badgeText}</div>
+      <div class="offer-name">${o.name}</div>
+      <ul class="offer-includes">
+        ${o.includes.map(inc=>`<li>${svg('check')}${inc}</li>`).join('')}
+        <li>${svg('check')}Free B12 injection included</li>
+      </ul>
+      <div class="offer-pricing"><span class="offer-retail">${o.retail}</span><span class="offer-price">${priceOf(o)}</span>${state.veteran?'<span style="font-size:.7rem;color:var(--coral-light);letter-spacing:.08em;font-weight:600">VET</span>':''}</div>
+      <div class="offer-match"><div class="offer-match-bar"><div class="offer-match-fill" style="width:${o.match}%"></div></div><div class="offer-match-pct">${o.match}% match</div></div>
+      <button class="offer-cta">${o.cta} →</button>
+    </div>`).join('');
+}
+function toggleVeteran(){
+  state.veteran=!state.veteran;
+  document.getElementById('vetToggle').classList.toggle('active',state.veteran);
+  document.getElementById('vetSub').textContent=state.veteran?'Veteran pricing applied — mahalo for your service 🎖️':'Tap to unlock your veteran pricing 🎖️';
+  renderOffers();
+}
+function selectOffer(el,idx){
+  document.querySelectorAll('.offer-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected'); state.selectedOffer=idx;
+  document.getElementById('claimForm').classList.add('visible');
+  setTimeout(()=>document.getElementById('claimForm').scrollIntoView({behavior:'smooth',block:'center'}),200);
+}
+function submitClaim(){
+  const name=document.getElementById('formName').value;
+  const phone=document.getElementById('formPhone').value;
+  const email=document.getElementById('formEmail').value;
+  if(!name||!phone){alert('Please enter your name and phone number');return;}
+  const goal=state.answers.q2||'energy';
+  const offer=(OFFERS[goal]||OFFERS.energy)[state.selectedOffer||0];
+  const price=offer?(state.veteran?offer.vet:offer.mem):'';
+  // TODO: POST to GHL Inbound Webhook. Payload ready — Igor supplies GHL_WEBHOOK + BOOKING_URL.
+  // const payload = { name, phone, email, goal, offer:offer.name, price,
+  //   veteran:state.veteran, island_time:state.answers.q1, duration:state.answers.q3,
+  //   impact:state.answers.q4, tried:(state.answers.q5||[]).join(','), hwc_before:state.answers.q6,
+  //   urgency:state.answers.q7, motivation:(state.answers.q8||[]).join(','),
+  //   utm_source:new URLSearchParams(location.search).get('utm_source'),
+  //   utm_campaign:new URLSearchParams(location.search).get('utm_campaign'),
+  //   full_quiz:JSON.stringify(state.answers) };
+  document.getElementById('claimForm').innerHTML=`
+    <div style="text-align:center;padding:16px">
+      <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:rgba(58,174,160,.2);border:1px solid var(--teal);display:flex;align-items:center;justify-content:center;color:var(--teal-light)">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${I.check}</svg>
+      </div>
+      <div style="font-family:var(--serif);font-size:1.4rem;margin-bottom:8px">You're all set, ${name}!</div>
+      <div style="font-size:.85rem;color:rgba(168,216,211,.8);margin-bottom:20px">Our team will call you at ${phone} within 24 hours to confirm your<br><strong style="color:var(--teal-light)">${offer?offer.name:'offer'} — ${price}${state.veteran?' (Veteran)':''} + Free B12</strong></div>
+      <div style="font-size:.78rem;color:rgba(255,255,255,.4)">Hawaii Wellness Clinic · Honolulu · Hilo · Kona</div>
+    </div>`;
+}
+
+/* ─── CONFETTI ───────────────────────────────────────── */
+function shootConfetti(){
+  const canvas=document.getElementById('particles-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  const P=Array.from({length:110},()=>({x:Math.random()*canvas.width,y:-10-Math.random()*100,vx:(Math.random()-.5)*3,vy:2+Math.random()*4,size:4+Math.random()*6,color:['#3aaea0','#e07a5f','#a8d8d3','#f5ede0','#fdfcfa'][Math.floor(Math.random()*5)],rot:Math.random()*360,rotV:(Math.random()-.5)*8,alpha:1}));
+  let frame=0;
+  (function anim(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.rotV;if(frame>60)p.alpha-=.015;
+      ctx.save();ctx.globalAlpha=Math.max(0,p.alpha);ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;ctx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);ctx.restore();});
+    frame++; frame<180?requestAnimationFrame(anim):ctx.clearRect(0,0,canvas.width,canvas.height);
+  })();
+}
+
+/* ─── INIT ───────────────────────────────────────────── */
+renderSteps();
+updateProgress();
+updateSlider('q4');
+</script>
+</body>
+</html>
