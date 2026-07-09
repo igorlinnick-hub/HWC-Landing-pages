@@ -188,8 +188,15 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bor
 .offer-match-bar{flex:1;height:4px;border-radius:100px;background:rgba(255,255,255,.1);overflow:hidden}
 .offer-match-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--teal),var(--coral))}
 .offer-match-pct{font-size:.72rem;color:rgba(168,216,211,.7)}
-.offer-cta{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--teal) 0%,#2a9080 100%);border:none;color:#fff;font-family:var(--sans);font-size:.9rem;font-weight:600;letter-spacing:.04em;cursor:pointer;box-shadow:0 4px 20px rgba(58,174,160,.3);transition:all .28s var(--ease-spring)}
-.offer-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(58,174,160,.45)}
+.offer-save{display:inline-block;font-size:.72rem;font-weight:600;color:var(--coral-light);letter-spacing:.04em;background:rgba(224,122,95,.15);border:1px solid rgba(224,122,95,.3);padding:3px 10px;border-radius:100px;margin-left:auto}
+.offer-tap-hint{font-size:.7rem;color:rgba(168,216,211,.45);letter-spacing:.04em;margin-top:12px}
+.offer-card.selected .offer-tap-hint{color:var(--teal-light)}
+.offers-note{font-size:.77rem;color:rgba(168,216,211,.72);text-align:center;line-height:1.55;margin:18px 0 2px;display:flex;align-items:center;justify-content:center;gap:7px;animation:fadeUp .5s .6s both}
+.offers-note svg{width:15px;height:15px;color:var(--teal);flex-shrink:0}
+.consult-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;margin-top:14px;background:linear-gradient(135deg,var(--teal) 0%,#2a9080 100%);border:none;border-radius:14px;color:#fff;font-size:1.02rem;font-weight:600;font-family:var(--sans);letter-spacing:.02em;cursor:pointer;box-shadow:0 8px 30px rgba(58,174,160,.4);transition:all .28s var(--ease-spring);animation:fadeUp .5s .64s both}
+.consult-cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(58,174,160,.5)}
+.consult-cta svg{width:18px;height:18px;transition:transform .25s}
+.consult-cta:hover svg{transform:translateX(4px)}
 
 .claim-form{display:none;margin-top:28px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(27,79,110,.28));border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;animation:fadeUp .5s var(--ease-spring) both}
 .claim-form.visible{display:block}
@@ -253,8 +260,10 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bor
       <div class="vet-toggle-text"><strong>Veteran or active military?</strong><span id="vetSub">Tap to unlock your veteran pricing 🎖️</span></div>
       <div class="vet-switch"><div class="vet-knob"></div></div>
     </div>
-    <div class="offers-label" id="offersLabel">Your personalized offers — choose one</div>
+    <div class="offers-label" id="offersLabel">Offers you may qualify for</div>
     <div class="offers-grid" id="offersGrid"></div>
+    <p class="offers-note" id="offersNote"></p>
+    <button class="consult-cta" id="consultCta" onclick="openConsult()">Book Your Consultation — See If You Qualify</button>
     <div class="claim-form" id="claimForm">
       <h3 id="formHeading">Claim Your B12 + Offer</h3>
       <div class="form-group"><label>Your Name</label><input type="text" placeholder="First name" id="formName"></div>
@@ -575,6 +584,9 @@ function showResults(){
 }
 let currentSet=[];
 const priceOf=o=>state.veteran?o.vet:o.mem;
+const money=s=>parseInt(String(s).replace(/[^0-9]/g,''))||0;
+const fmt=n=>'$'+n.toLocaleString('en-US');
+const saveOf=o=>fmt(money(o.retail)-money(priceOf(o)));
 const isPatient=()=>state.answers.q6==='patient';
 function buildProfileReveal(){
   document.getElementById('vetIcon').innerHTML=svg('medal');
@@ -590,10 +602,12 @@ function buildProfileReveal(){
   document.getElementById('resultSub').textContent='Personalized for you · Hawaii Wellness Clinic';
   document.getElementById('b12Gift').style.display='';
   document.getElementById('vetToggle').style.display='';
-  document.getElementById('offersLabel').textContent='Your personalized offers — choose one';
-  document.getElementById('formHeading').textContent='Claim Your B12 + Offer';
-  document.getElementById('formSubmitBtn').textContent='Book My Free B12 + Offer →';
-  document.getElementById('formNote').innerHTML="We'll call or text you within 24 hours to confirm your spot.<br>No spam, ever.";
+  document.getElementById('offersLabel').textContent='Offers you may qualify for';
+  document.getElementById('offersNote').innerHTML=svg('check')+'A licensed provider confirms the right treatment & dose for you — no guesswork.';
+  document.getElementById('consultCta').innerHTML='Book Your Consultation — See If You Qualify'+svg('arrow');
+  document.getElementById('formHeading').textContent='Book Your Consultation';
+  document.getElementById('formSubmitBtn').innerHTML='Book My Consultation →';
+  document.getElementById('formNote').innerHTML="We'll call or text within 24 hours to schedule your consultation.<br>Your free B12 is included.";
   document.getElementById('giftIcon').innerHTML=svg('gift');
   document.getElementById('giftCheck').innerHTML=svg('check')+' Claimed · No strings attached';
   renderOffers();
@@ -607,19 +621,22 @@ function buildPatientReveal(){
   document.getElementById('offersLabel').textContent='Based on your answers — your next step';
   const rec=currentSet[0];
   document.getElementById('offersGrid').innerHTML=`
-    <div class="offer-card selected" onclick="selectOffer(this,0)">
+    <div class="offer-card selected" style="cursor:default">
       <div class="offer-badge best">Recommended for you</div>
       <div class="offer-name">${rec.name}</div>
       <ul class="offer-includes">${rec.includes.map(inc=>`<li>${svg('check')}${inc}</li>`).join('')}</ul>
-      <p style="font-size:.84rem;color:rgba(168,216,211,.82);line-height:1.5;margin:2px 0 16px">Let's add this to your care plan. Your provider will review it with you at your next visit — at your member pricing.</p>
-      <button class="offer-cta">Book My Next Visit →</button>
+      <p style="font-size:.84rem;color:rgba(168,216,211,.82);line-height:1.5;margin:2px 0 0">Let's add this to your care plan. Your provider will review it with you at your next visit — at your member pricing.</p>
     </div>`;
   state.selectedOffer=0;
+  document.getElementById('offersNote').innerHTML=svg('check')+'Your provider confirms the right plan for you at your visit.';
+  document.getElementById('consultCta').innerHTML='Book My Next Visit'+svg('arrow');
   document.getElementById('formHeading').textContent='Book Your Next Visit';
-  document.getElementById('formSubmitBtn').textContent='Request My Visit →';
+  document.getElementById('formSubmitBtn').innerHTML='Request My Visit →';
   document.getElementById('formNote').innerHTML="We'll reach out within 24 hours to get you scheduled.<br>Mahalo for being part of the ʻohana.";
 }
 function renderOffers(){
+  // Cards are informational — show the discount they MAY qualify for. No self-selection of
+  // treatment/dose (medical). One consultation CTA gates everything below the grid.
   document.getElementById('offersGrid').innerHTML=currentSet.map((o,i)=>`
     <div class="offer-card${state.selectedOffer===i?' selected':''}" onclick="selectOffer(this,${i})">
       <div class="offer-badge ${o.badge}">${o.badgeText}</div>
@@ -628,9 +645,9 @@ function renderOffers(){
         ${o.includes.map(inc=>`<li>${svg('check')}${inc}</li>`).join('')}
         <li>${svg('check')}Free B12 injection included</li>
       </ul>
-      <div class="offer-pricing"><span class="offer-retail">${o.retail}</span><span class="offer-price">${priceOf(o)}</span>${state.veteran?'<span style="font-size:.7rem;color:var(--coral-light);letter-spacing:.08em;font-weight:600">VET</span>':''}</div>
+      <div class="offer-pricing"><span class="offer-retail">${o.retail}</span><span class="offer-price">${priceOf(o)}</span><span class="offer-save">Save ${saveOf(o)}${state.veteran?' · VET':''}</span></div>
       <div class="offer-match"><div class="offer-match-bar"><div class="offer-match-fill" style="width:${o.match}%"></div></div><div class="offer-match-pct">${o.match}% match</div></div>
-      <button class="offer-cta">${o.cta} →</button>
+      <div class="offer-tap-hint">${state.selectedOffer===i?'✓ You\'re curious about this one':'Tap if this is what you\'re after'}</div>
     </div>`).join('');
 }
 function toggleVeteran(){
@@ -640,10 +657,14 @@ function toggleVeteran(){
   renderOffers();
 }
 function selectOffer(el,idx){
+  // Soft interest signal only (captured for the sales call). Does NOT let them self-prescribe.
   document.querySelectorAll('.offer-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected'); state.selectedOffer=idx;
+  renderOffers();
+}
+function openConsult(){
   document.getElementById('claimForm').classList.add('visible');
-  setTimeout(()=>document.getElementById('claimForm').scrollIntoView({behavior:'smooth',block:'center'}),200);
+  setTimeout(()=>document.getElementById('claimForm').scrollIntoView({behavior:'smooth',block:'center'}),150);
 }
 function submitClaim(){
   const name=document.getElementById('formName').value;
@@ -664,7 +685,7 @@ function submitClaim(){
   //   full_quiz:JSON.stringify(state.answers) };
   const confirmLine = patient
     ? `Our team will call you at ${phone} within 24 hours to schedule your visit for<br><strong style="color:var(--teal-light)">${offer?offer.name:'your next step'}</strong>`
-    : `Our team will call you at ${phone} within 24 hours to confirm your<br><strong style="color:var(--teal-light)">${offer?offer.name:'offer'} — ${price}${state.veteran?' (Veteran)':''} + Free B12</strong>`;
+    : `Our team will call you at ${phone} within 24 hours to book your consultation${offer?` for <strong style="color:var(--teal-light)">${offer.name}</strong>`:''}.<br>Your <strong style="color:var(--teal-light)">Free B12</strong> is included.`;
   const headline = patient ? `See you soon, ${name}!` : `You're all set, ${name}!`;
   document.getElementById('claimForm').innerHTML=`
     <div style="text-align:center;padding:16px">
