@@ -522,29 +522,26 @@ function selectRating(key,v){
    LOW-MARGIN (pain/longevity biologics, -10/-20%) lead with consult, keep product at floor. */
 const OFFERS={
   weight:[
-    {badge:'popular',badgeText:'Most Popular',name:'Semaglutide — First Month',includes:['4 Semaglutide injections','Metabolic consultation','Personalized dosing plan'],retail:'$399',mem:'$279',vet:'$200',match:96,cta:'Start My Weight Loss Journey'},
-    {badge:'best',badgeText:'Best Results',name:'Tirzepatide — First Month',includes:['4 Tirzepatide injections','Full metabolic assessment','Body composition analysis'],retail:'$599',mem:'$419',vet:'$300',match:88,cta:'Fast-Track My Results'},
-    {badge:'value',badgeText:'Quick Start',name:'Weight Loss Booster',includes:['Weight Loss Booster injection','Nutrition consultation','30-day follow-up plan'],retail:'$100',mem:'$70',vet:'$50',match:79,cta:'Boost My Metabolism'}
+    {badge:'popular',badgeText:'Most Popular',name:'Semaglutide (4 Injections)',includes:['4 Semaglutide injections','Metabolic consultation','Personalized dosing plan'],retail:'$399',mem:'$279',vet:'$200',cta:'Start My Weight Loss Journey'},
+    {badge:'best',badgeText:'Best Results',name:'Tirzepatide (4 Injections)',includes:['4 Tirzepatide injections','Full metabolic assessment','Body composition analysis'],retail:'$599',mem:'$419',vet:'$300',cta:'Fast-Track My Results'},
+    {badge:'value',badgeText:'Quick Start',name:'Weight Loss Booster',includes:['Weight Loss Booster injection','Nutrition consultation','30-day follow-up plan'],retail:'$100',mem:'$70',vet:'$50',cta:'Boost My Metabolism'}
   ],
   pain:[
-    {badge:'popular',badgeText:'Start Here',name:'Pain Relief Assessment',includes:['Full pain & joint consultation','Provider exam + treatment mapping','First Shockwave or Laser session'],retail:'$250',mem:'$99',vet:'$79',match:95,cta:'Start Feeling Better'},
-    {badge:'best',badgeText:'Quick Relief',name:'Shockwave Therapy Session',includes:['Single Shockwave Therapy session','Targeted, non-invasive pain relief','Provider guidance on next steps'],retail:'$140',mem:'$126',vet:'$112',match:88,cta:'Book a Session'},
-    {badge:'value',badgeText:'Regenerative',name:'PRP Joint Session',includes:['Single PRP injection','Joint & mobility assessment','Regenerative roadmap'],retail:'$900',mem:'$810',vet:'$720',match:84,cta:'Explore Regenerative Care'}
+    {badge:'popular',badgeText:'Quick Relief',name:'Shockwave Therapy Session',includes:['Single Shockwave Therapy session','Targeted, non-invasive pain relief','Provider guidance on next steps'],retail:'$140',mem:'$126',vet:'$112',cta:'Book a Session'},
+    {badge:'value',badgeText:'Regenerative',name:'PRP Joint Session',includes:['Single PRP injection','Joint & mobility assessment','Regenerative roadmap'],retail:'$900',mem:'$810',vet:'$720',cta:'Explore Regenerative Care'}
   ],
   energy:[
-    {badge:'popular',badgeText:'Most Popular',name:'NAD+ Energy Reset',includes:['NAD+ 100mg injection','Wellness consultation','Energy optimization plan'],retail:'$100',mem:'$70',vet:'$50',match:94,cta:'Reset My Energy'},
-    {badge:'best',badgeText:'Best Value',name:'IV Vitality Drip',includes:["Myer's Cocktail IV drip",'25+ vitamins & minerals','Immediate energy boost'],retail:'$246',mem:'$172',vet:'$123',match:89,cta:'Claim My IV Drip'},
-    {badge:'value',badgeText:'Longevity',name:'Peptide Starter Stack',includes:['Curated peptide protocol','30-min specialist consultation','Custom compound plan'],retail:'$270',mem:'$189',vet:'$135',match:82,cta:'Start My Peptide Journey'}
+    {badge:'popular',badgeText:'Most Popular',name:'NAD+ Energy Reset',includes:['NAD+ 100mg injection','Wellness consultation','Energy optimization plan'],retail:'$100',mem:'$70',vet:'$50',cta:'Reset My Energy'},
+    {badge:'best',badgeText:'Best Value',name:'IV Vitality Drip',includes:["Myer's Cocktail IV drip",'25+ vitamins & minerals','Immediate energy boost'],retail:'$246',mem:'$172',vet:'$123',cta:'Claim My IV Drip'},
+    {badge:'value',badgeText:'Longevity',name:'Peptide Starter Stack',includes:['Curated peptide protocol','30-min specialist consultation','Custom compound plan'],retail:'$270',mem:'$189',vet:'$135',cta:'Start My Peptide Journey'}
   ],
   mental:[
-    {badge:'popular',badgeText:'Most Popular',name:'Exomind Session',includes:['First Exomind session','Mental clarity assessment','Personalized protocol'],retail:'$400',mem:'$280',vet:'$200',match:93,cta:'Clear My Mind'},
-    {badge:'best',badgeText:'Deep Relief',name:'Ketamine — First Session',includes:['Full mental health assessment','First Ketamine session','Personalized treatment plan'],retail:'$800',mem:'$560',vet:'$400',match:88,cta:'Explore Ketamine Therapy'},
-    {badge:'value',badgeText:'Low Commitment',name:'Mental Health Consultation',includes:['1-on-1 provider assessment','Ketamine / SGB / Exomind eligibility','Custom treatment roadmap'],retail:'$150',mem:'$99',vet:'$79',match:85,cta:'Book My Consultation'}
+    {badge:'popular',badgeText:'Most Popular',name:'Exomind Session',includes:['First Exomind session','Mental clarity assessment','Personalized protocol'],retail:'$400',mem:'$280',vet:'$200',cta:'Clear My Mind'},
+    {badge:'best',badgeText:'Deep Relief',name:'Ketamine — First Session',includes:['Full mental health assessment','First Ketamine session','Personalized treatment plan'],retail:'$800',mem:'$560',vet:'$400',cta:'Explore Ketamine Therapy'}
   ],
   longevity:[
-    {badge:'popular',badgeText:'Start Here',name:'Regenerative Consultation',includes:['1-on-1 longevity consultation','Biologic & peptide eligibility','Personalized regen blueprint'],retail:'$250',mem:'$99',vet:'$79',match:94,cta:'Build My Blueprint'},
-    {badge:'value',badgeText:'Affordable Biologic',name:'PRP Session',includes:['Single PRP injection','Regenerative assessment','Longevity protocol design'],retail:'$900',mem:'$810',vet:'$720',match:87,cta:'Try Regenerative Medicine'},
-    {badge:'best',badgeText:'Premium',name:'Nano Exosome Therapy',includes:['Nano AER 50bil exosome injection','Anti-aging consultation','Full longevity protocol'],retail:'$2,000',mem:'$1,800',vet:'$1,600',match:82,cta:'Experience Stem Cell Therapy'}
+    {badge:'popular',badgeText:'Affordable Biologic',name:'PRP Session',includes:['Single PRP injection','Regenerative assessment','Longevity protocol design'],retail:'$900',mem:'$810',vet:'$720',cta:'Try Regenerative Medicine'},
+    {badge:'best',badgeText:'Premium',name:'Nano Exosome Therapy',includes:['Nano AER 50bil exosome injection','Anti-aging consultation','Full longevity protocol'],retail:'$2,000',mem:'$1,800',vet:'$1,600',cta:'Experience Stem Cell Therapy'}
   ]
 };
 
@@ -640,7 +637,6 @@ function renderOffers(){
         <li>${svg('check')}Free B12 injection included</li>
       </ul>
       <div class="offer-pricing"><span class="offer-retail">${o.retail}</span><span class="offer-price">${priceOf(o)}</span><span class="offer-save">Save ${saveOf(o)}${state.veteran?' · VET':''}</span></div>
-      <div class="offer-match"><div class="offer-match-bar"><div class="offer-match-fill" style="width:${o.match}%"></div></div><div class="offer-match-pct">${o.match}% match</div></div>
       <div class="offer-tap-hint">${state.selectedOffer===i?'✓ You\'re curious about this one':'Tap if this is what you\'re after'}</div>
     </div>`).join('');
 }
