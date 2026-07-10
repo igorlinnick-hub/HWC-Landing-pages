@@ -348,16 +348,15 @@ const QUESTIONS = [
       {icon:'home', t:'2–5 years', s:'Settled into island life', v:'mid'},
       {icon:'star', t:'5+ years / Born here', s:'Kamaʻāina — this is home', v:'kama'},
     ]},
-  { key:'q2', type:'grid', icon:'target',
+  { key:'q2', type:'single', icon:'target',
     q:'What\'s your <em>primary health goal?</em>',
     sub:'This shapes your entire personalized plan',
     opts:[
-      {icon:'weight', t:'Lose weight the right way', v:'weight'},
-      {icon:'activity', t:'Relieve chronic pain or joints', v:'pain'},
-      {icon:'zap', t:'More energy & mental clarity', v:'energy'},
-      {icon:'heartpulse', t:'Reduce stress or low mood', v:'mental'},
-      {icon:'leaf', t:'Slow aging & stay vital', v:'longevity'},
-      {icon:'sparkle', t:'Look refreshed & confident', v:'aesthetic'},
+      {icon:'weight', t:'Lose weight the right way', s:'Medical weight loss · GLP-1', v:'weight'},
+      {icon:'activity', t:'Relieve chronic pain or joints', s:'Neuropathy, joints, recovery', v:'pain'},
+      {icon:'zap', t:'More energy & mental clarity', s:'Fatigue, focus, vitality', v:'energy'},
+      {icon:'heartpulse', t:'Reduce stress or low mood', s:'Mental wellness & calm', v:'mental'},
+      {icon:'leaf', t:'Slow aging & stay vital', s:'Longevity & regenerative', v:'longevity'},
     ]},
   { key:'q3', type:'single', icon:'clock',
     q:'How long have you been <em>dealing with this?</em>',
@@ -519,7 +518,7 @@ function selectRating(key,v){
 
 /* ─── OFFERS ─────────────────────────────────────────── */
 /* Prices: retail = list, mem = member floor (-30/-50/-10%), vet = veteran floor.
-   HIGH-MARGIN (weight/energy/mental/aesthetic) can discount deep.
+   HIGH-MARGIN (weight/energy/mental) can discount deep.
    LOW-MARGIN (pain/longevity biologics, -10/-20%) lead with consult, keep product at floor. */
 const OFFERS={
   weight:[
@@ -529,7 +528,7 @@ const OFFERS={
   ],
   pain:[
     {badge:'popular',badgeText:'Start Here',name:'Pain Relief Assessment',includes:['Full pain & joint consultation','Provider exam + treatment mapping','First Shockwave or Laser session'],retail:'$250',mem:'$99',vet:'$79',match:95,cta:'Start Feeling Better'},
-    {badge:'best',badgeText:'Best for Chronic Pain',name:'Shockwave 6-Session Package',includes:['6 Shockwave Therapy sessions','Progress tracking each visit','Personalized recovery plan'],retail:'$840',mem:'$680',vet:'$605',match:90,cta:'Commit to Relief'},
+    {badge:'best',badgeText:'Quick Relief',name:'Shockwave Therapy Session',includes:['Single Shockwave Therapy session','Targeted, non-invasive pain relief','Provider guidance on next steps'],retail:'$140',mem:'$126',vet:'$112',match:88,cta:'Book a Session'},
     {badge:'value',badgeText:'Regenerative',name:'PRP Joint Session',includes:['Single PRP injection','Joint & mobility assessment','Regenerative roadmap'],retail:'$900',mem:'$810',vet:'$720',match:84,cta:'Explore Regenerative Care'}
   ],
   energy:[
@@ -546,18 +545,13 @@ const OFFERS={
     {badge:'popular',badgeText:'Start Here',name:'Regenerative Consultation',includes:['1-on-1 longevity consultation','Biologic & peptide eligibility','Personalized regen blueprint'],retail:'$250',mem:'$99',vet:'$79',match:94,cta:'Build My Blueprint'},
     {badge:'value',badgeText:'Affordable Biologic',name:'PRP Session',includes:['Single PRP injection','Regenerative assessment','Longevity protocol design'],retail:'$900',mem:'$810',vet:'$720',match:87,cta:'Try Regenerative Medicine'},
     {badge:'best',badgeText:'Premium',name:'Nano Exosome Therapy',includes:['Nano AER 50bil exosome injection','Anti-aging consultation','Full longevity protocol'],retail:'$2,000',mem:'$1,800',vet:'$1,600',match:82,cta:'Experience Stem Cell Therapy'}
-  ],
-  aesthetic:[
-    {badge:'popular',badgeText:'Most Popular',name:'Botox — 20 Units',includes:['20 units of Botox','Facial assessment with provider','Personalized aesthetic plan'],retail:'$260',mem:'$180',vet:'$140',match:93,cta:'Look & Feel Refreshed'},
-    {badge:'best',badgeText:'Glow Up',name:'Sculptra Treatment',includes:['Single Sculptra treatment','Custom facial mapping','Before-photo documentation'],retail:'$1,000',mem:'$700',vet:'$500',match:87,cta:'Start My Glow Journey'},
-    {badge:'value',badgeText:'Low Commitment',name:'Aesthetic Consultation',includes:['1-on-1 aesthetic assessment','Botox / filler / hair eligibility','Personalized treatment plan'],retail:'$100',mem:'$49',vet:'$39',match:81,cta:'Book My Consultation'}
   ]
 };
 
 /* ─── PROFILE TAGS ───────────────────────────────────── */
 function buildProfileTags(){
   const tags=[], a=state.answers;
-  const goalMap={weight:'Weight Loss Journey',pain:'Pain Relief Seeker',energy:'Energy Optimizer',mental:'Mental Wellness',longevity:'Longevity Explorer',aesthetic:'Aesthetic Glow'};
+  const goalMap={weight:'Weight Loss Journey',pain:'Pain Relief Seeker',energy:'Energy Optimizer',mental:'Mental Wellness',longevity:'Longevity Explorer'};
   if(a.q2)tags.push(goalMap[a.q2]||'Wellness Seeker');
   if(a.q3==='long')tags.push('Long-term challenge');
   if((a.q4||0)>=7)tags.push('High impact on life');
