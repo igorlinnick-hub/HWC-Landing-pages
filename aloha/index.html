@@ -734,14 +734,114 @@
   .locations {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 4px;
   }
 
-  .location {
+  .location-toggle {
     display: flex;
     gap: 12px;
     align-items: flex-start;
-    padding: 0 4px;
+    width: 100%;
+    padding: 8px 6px;
+    background: none;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .location-toggle:hover { background: rgba(58, 174, 160, 0.08); }
+
+  .location-hint {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    align-self: center;
+    flex-shrink: 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(168, 216, 211, 0.55);
+    transition: color 0.3s;
+  }
+
+  .location-chevron {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    transition: transform 0.35s;
+  }
+
+  .location.open .location-chevron { transform: rotate(180deg); }
+  .location.open .location-hint { color: var(--teal-light); }
+
+  .location-map {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.45s cubic-bezier(0.33, 1, 0.68, 1), visibility 0s 0.45s;
+  }
+
+  .location.open .location-map {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.45s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .location-map-inner { overflow: hidden; min-height: 0; }
+
+  .map-frame {
+    margin: 8px 0 12px;
+    padding: 1px;
+    border-radius: 16px;
+    background: linear-gradient(140deg, rgba(58, 174, 160, 0.55), rgba(168, 216, 211, 0.18) 40%, rgba(224, 122, 95, 0.45));
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 24px rgba(58, 174, 160, 0.12);
+  }
+
+  .map-frame-inner {
+    position: relative;
+    z-index: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    background: var(--ocean-dark);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+
+  .map-frame-inner iframe {
+    display: block;
+    width: 100%;
+    height: 230px;
+    border: 0;
+    filter: saturate(0.85) contrast(1.02);
+  }
+
+  .map-directions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    text-decoration: none;
+    background: rgba(13, 47, 66, 0.72);
+    border-top: 1px solid rgba(168, 216, 211, 0.14);
+    transition: color 0.3s, background 0.3s;
+  }
+
+  .map-directions:hover { color: var(--white); background: rgba(27, 79, 110, 0.8); }
+
+  .map-directions svg {
+    width: 13px;
+    height: 13px;
+    fill: currentColor;
   }
 
   .location-pin {
@@ -761,6 +861,7 @@
   .location-body { flex: 1; min-width: 0; }
 
   .location-city {
+    display: block;
     font-family: var(--serif);
     font-size: 1rem;
     color: var(--white);
@@ -768,6 +869,7 @@
   }
 
   .location-addr {
+    display: block;
     font-size: 0.78rem;
     color: rgba(255, 255, 255, 0.55);
     line-height: 1.5;
@@ -1034,24 +1136,75 @@
 
     <div class="locations">
       <div class="location">
-        <div class="location-pin">◉</div>
-        <div class="location-body">
-          <div class="location-city">Honolulu</div>
-          <div class="location-addr">Ala Moana Building<br>1441 Kapiolani Blvd, Suite 1002</div>
+        <button type="button" class="location-toggle" aria-expanded="false" aria-controls="map-honolulu">
+          <span class="location-pin">◉</span>
+          <span class="location-body">
+            <span class="location-city">Honolulu</span>
+            <span class="location-addr">Ala Moana Building<br>1441 Kapiolani Blvd, Suite 1002</span>
+          </span>
+          <span class="location-hint">Map
+            <svg class="location-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+        </button>
+        <div class="location-map" id="map-honolulu" data-map-src="https://www.google.com/maps?q=1441%20Kapiolani%20Blvd%2C%20Honolulu%2C%20HI%2096814&z=16&output=embed">
+          <div class="location-map-inner">
+            <div class="map-frame">
+              <div class="map-frame-inner">
+                <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&destination=1441%20Kapiolani%20Blvd%20Suite%201002%2C%20Honolulu%2C%20HI%2096814" target="_blank" rel="noopener">
+                  Get Directions
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v2h10.59L4 18.59 5.41 20 17 8.41V19h2V5z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="location">
-        <div class="location-pin">◉</div>
-        <div class="location-body">
-          <div class="location-city">Kailua Kona</div>
-          <div class="location-addr">75-5591 Palani Road, Suite 2002</div>
+        <button type="button" class="location-toggle" aria-expanded="false" aria-controls="map-kona">
+          <span class="location-pin">◉</span>
+          <span class="location-body">
+            <span class="location-city">Kailua Kona</span>
+            <span class="location-addr">75-5591 Palani Road, Suite 2002</span>
+          </span>
+          <span class="location-hint">Map
+            <svg class="location-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+        </button>
+        <div class="location-map" id="map-kona" data-map-src="https://www.google.com/maps?q=75-5591%20Palani%20Rd%2C%20Kailua-Kona%2C%20HI%2096740&z=16&output=embed">
+          <div class="location-map-inner">
+            <div class="map-frame">
+              <div class="map-frame-inner">
+                <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&destination=75-5591%20Palani%20Rd%20Suite%202002%2C%20Kailua-Kona%2C%20HI%2096740" target="_blank" rel="noopener">
+                  Get Directions
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v2h10.59L4 18.59 5.41 20 17 8.41V19h2V5z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="location">
-        <div class="location-pin">◉</div>
-        <div class="location-body">
-          <div class="location-city">Hilo</div>
-          <div class="location-addr">392 Kapiolani Street</div>
+        <button type="button" class="location-toggle" aria-expanded="false" aria-controls="map-hilo">
+          <span class="location-pin">◉</span>
+          <span class="location-body">
+            <span class="location-city">Hilo</span>
+            <span class="location-addr">392 Kapiolani Street</span>
+          </span>
+          <span class="location-hint">Map
+            <svg class="location-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+          </span>
+        </button>
+        <div class="location-map" id="map-hilo" data-map-src="https://www.google.com/maps?q=392%20Kapiolani%20St%2C%20Hilo%2C%20HI%2096720&z=16&output=embed">
+          <div class="location-map-inner">
+            <div class="map-frame">
+              <div class="map-frame-inner">
+                <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&destination=392%20Kapiolani%20St%2C%20Hilo%2C%20HI%2096720" target="_blank" rel="noopener">
+                  Get Directions
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v2h10.59L4 18.59 5.41 20 17 8.41V19h2V5z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1100,6 +1253,28 @@
       });
       card.addEventListener('mouseleave', function() {
         card.style.transform = '';
+      });
+    });
+  })();
+
+  // ============ LOCATION MAPS (lite-embed: no iframe until first tap) ============
+  (function() {
+    document.querySelectorAll('.location').forEach(function(loc) {
+      const btn = loc.querySelector('.location-toggle');
+      const map = loc.querySelector('.location-map');
+      btn.addEventListener('click', function() {
+        const open = loc.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+        if (open && !map.dataset.loaded) {
+          map.dataset.loaded = '1';
+          const frame = document.createElement('iframe');
+          frame.src = map.dataset.mapSrc;
+          frame.loading = 'lazy';
+          frame.allowFullscreen = true;
+          frame.referrerPolicy = 'no-referrer-when-downgrade';
+          frame.title = btn.querySelector('.location-city').textContent + ' — Google Maps';
+          map.querySelector('.map-frame-inner').prepend(frame);
+        }
       });
     });
   })();
